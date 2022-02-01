@@ -5,12 +5,14 @@ class MyTextButtonIcon extends StatelessWidget {
   
   final String myText;
   IconData myIcon;
+  String routeName;
   
   /// This creates my unique TextButton.icon. Expected to take two parameters.
   MyTextButtonIcon({
     Key? key,
     required this.myText,
     required this.myIcon,
+    required this.routeName,
   });
 
   @override
@@ -24,7 +26,7 @@ class MyTextButtonIcon extends StatelessWidget {
           Colors.purple[100],
         ),
       ),
-      onPressed: null,
+      onPressed: () {Navigator.pushNamed(context, routeName);},
       icon: Icon(myIcon),
       label: Text(myText),
     );
