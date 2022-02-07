@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/MyClasses/routes.dart';
+import 'package:inventory_app/pages/AuthenticationPages/login.dart';
+import 'package:inventory_app/pages/AuthenticationPages/signup.dart';
 import 'package:inventory_app/pages/AuthenticationPages/welcome_page.dart';
 
 import 'package:inventory_app/pages/home.dart';
@@ -29,6 +31,8 @@ class MyApp extends StatelessWidget {
         AppRoute.productsDisplay: (context) => ProductDisplay(),
         AppRoute.lowStock: (context) => LowStockDisplay(),
         AppRoute.welcome: (context) => WelcomeScreen(),
+        AppRoute.login:(context) => LoginPage(),
+        AppRoute.signup:(context) => SignupPage(),
       },
     );
   }

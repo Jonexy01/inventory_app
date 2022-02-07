@@ -10,6 +10,8 @@ class AppRoute {
   static const String lowStock = 'productsDisplay';
   static const String productsDisplay = 'lowStockDisplay';
   static const String welcome = '/welcome';
+  static const String login = '/login';
+  static const String signup = '/signin';
 
   // Copied code below keeps some pages in a Map
   

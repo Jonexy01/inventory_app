@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MyCircularTextButton extends StatelessWidget {
 
   final String text;
-  final Function press;
+  final VoidCallback press;
   final Color color, textColor;
   
   const MyCircularTextButton({
@@ -31,7 +31,7 @@ class MyCircularTextButton extends StatelessWidget {
             ),
             backgroundColor: MaterialStateProperty.all(color)
           ),
-          onPressed: () => press, 
+          onPressed: press, 
           child: Text(
             text,
             style: TextStyle(

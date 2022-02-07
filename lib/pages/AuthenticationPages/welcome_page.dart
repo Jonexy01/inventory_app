@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/MyClasses/routes.dart';
 
 import '../../MyWidgets/my_circular_text_button.dart';
 
@@ -24,12 +25,12 @@ class WelcomeScreen extends StatelessWidget {
             SizedBox(height: size.height * 0.3,),
             MyCircularTextButton(
               text: 'Login',
-              press: () {},
+              press: () {Navigator.pushReplacementNamed(context, AppRoute.login);},
               color: Colors.purple.shade400,
             ),
             MyCircularTextButton(
               text: 'Sign up', 
-              press: () {},
+              press: () {Navigator.pushReplacementNamed(context, AppRoute.signup);},
               color: Colors.purple.shade100,
               textColor: Colors.black,
             )
