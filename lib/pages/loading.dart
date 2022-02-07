@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:inventory_app/MyClasses/routes.dart';
 
 class Loading extends StatefulWidget {
   const Loading({ Key? key }) : super(key: key);
@@ -19,7 +20,7 @@ class _LoadingState extends State<Loading> {
   void initState() {
     super.initState();
     //_navigatehome();
-    Future.delayed(Duration(seconds: 5), () {Navigator.pushReplacementNamed(context, '/home');});
+    Future.delayed(Duration(seconds: 5), () {Navigator.pushReplacementNamed(context, AppRoute.home);});
   }
 
   @override

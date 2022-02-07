@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/MyClasses/routes.dart';
 
 import 'package:inventory_app/MyWidgets/my_text_button_icon.dart';
-import 'package:inventory_app/table_head.dart';
+import 'package:inventory_app/MyClasses/table_head.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -35,13 +36,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     Expanded(
                       child: Container(
                         margin: EdgeInsets.all(10),
-                        child: MyTextButtonIcon(myText: "Low Stock", myIcon: Icons.favorite, routeName: '/lowStockDisplay',)
+                        child: MyTextButtonIcon(myText: "Low Stock", myIcon: Icons.favorite, routeName: AppRoute.lowStock,)
                       ),
                     ),
                     Expanded(
                       child: Container(
                         margin: EdgeInsets.all(10),
-                        child: MyTextButtonIcon(myText: 'Products', myIcon: Icons.accessibility, routeName: '/productsDisplay',)
+                        child: MyTextButtonIcon(myText: 'Products', myIcon: Icons.accessibility, routeName: AppRoute.productsDisplay,)
                       ),
                     ),
                   ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/MyClasses/routes.dart';
+import 'package:inventory_app/pages/AuthenticationPages/welcome_page.dart';
 
 import 'package:inventory_app/pages/home.dart';
 import 'package:inventory_app/pages/loading.dart';
@@ -20,12 +22,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      initialRoute: '/',
+      initialRoute: AppRoute.welcome,
       routes: {
-        '/': (context) => Loading(), 
-        '/home': (context) => MyHomePage(title: 'Welcome to Inventory App'),
-        '/productsDisplay': (context) => ProductDisplay(),
-        '/lowStockDisplay': (context) => LowStockDisplay(),
+        //AppRoute.loading: (context) => Loading(), 
+        AppRoute.home: (context) => MyHomePage(title: 'Welcome to Inventory App'),
+        AppRoute.productsDisplay: (context) => ProductDisplay(),
+        AppRoute.lowStock: (context) => LowStockDisplay(),
+        AppRoute.welcome: (context) => WelcomeScreen(),
       },
     );
   }
