@@ -8,6 +8,7 @@ import 'package:inventory_app/pages/home.dart';
 import 'package:inventory_app/pages/loading.dart';
 import 'package:inventory_app/pages/low_stock_display.dart';
 import 'package:inventory_app/pages/products_display.dart';
+import 'package:inventory_app/pages/wrapper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,10 +25,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      initialRoute: AppRoute.welcome,
       routes: {
-        //AppRoute.loading: (context) => Loading(), 
-        AppRoute.home: (context) => MyHomePage(title: 'Welcome to Inventory App'),
+        AppRoute.wrapper:(context) => Wrapper(),
+        AppRoute.loading: (context) => Loading(), 
+        AppRoute.home: (context) => Home(title: 'Welcome to Inventory App'),
         AppRoute.productsDisplay: (context) => ProductDisplay(),
         AppRoute.lowStock: (context) => LowStockDisplay(),
         AppRoute.welcome: (context) => WelcomeScreen(),

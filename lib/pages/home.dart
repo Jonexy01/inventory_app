@@ -4,16 +4,16 @@ import 'package:inventory_app/MyClasses/routes.dart';
 import 'package:inventory_app/MyWidgets/my_text_button_icon.dart';
 import 'package:inventory_app/MyClasses/table_head.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeState extends State<Home> {
   
 
   @override
