@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_app/MyClasses/user.dart';
 import 'package:inventory_app/services/auth.dart';
@@ -14,6 +15,8 @@ import 'package:inventory_app/pages/products_display.dart';
 import 'package:inventory_app/pages/wrapper.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 

@@ -20,7 +20,7 @@ class _LoadingState extends State<Loading> {
   void initState() {
     super.initState();
     //_navigatehome();
-    Future.delayed(Duration(seconds: 5), () {Navigator.pushReplacementNamed(context, AppRoute.home);});
+    Future.delayed(Duration(seconds: 5), () {Navigator.pushReplacementNamed(context, AppRoute.wrapper);});
   }
 
   @override
