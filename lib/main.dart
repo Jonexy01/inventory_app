@@ -14,9 +14,9 @@ import 'package:inventory_app/pages/low_stock_display.dart';
 import 'package:inventory_app/pages/products_display.dart';
 import 'package:inventory_app/pages/wrapper.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
