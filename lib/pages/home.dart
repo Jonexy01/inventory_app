@@ -3,6 +3,7 @@ import 'package:inventory_app/MyClasses/routes.dart';
 
 import 'package:inventory_app/MyWidgets/my_text_button_icon.dart';
 import 'package:inventory_app/MyClasses/table_head.dart';
+import 'package:inventory_app/services/auth.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key, required this.title}) : super(key: key);
@@ -14,6 +15,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  final AuthService _auth = AuthService();
   
 
   @override
@@ -23,6 +26,15 @@ class _HomeState extends State<Home> {
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text(widget.title),
+          actions: [
+            TextButton.icon(
+              onPressed: () async {
+                await _auth.mySignOut();
+              }, 
+              icon: Icon(Icons.person), 
+              label: Text('Logout'),
+            )
+          ],
         ),
         body: Container(
           child: Column(

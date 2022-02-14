@@ -8,8 +8,18 @@ import '../../MyWidgets/my_rounded_input_field.dart';
 import '../../MyWidgets/my_rounded_password_field.dart';
 import '../../MyWidgets/or_divider.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   const SignupPage({ Key? key }) : super(key: key);
+
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+
+  //text field state
+  String email = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +40,21 @@ class SignupPage extends StatelessWidget {
             SizedBox(height: size.height * 0.3,),
             MyRoundedInputField(
               onChanged: ((value) {
-                
+                email = value;
               }),
               hintText: 'Enter email',
               icon: Icons.person,
             ),
             MyRoundPasswordField(
               onChanged: ((value) {
-                
+                password = value;
               }),
             ),
             MyCircularTextButton(
               text: 'Sign up', 
-              press: () {}
+              press: () async {
+                
+              }
             ),
             MyHaveAnAccountCheck(
               login: false,
