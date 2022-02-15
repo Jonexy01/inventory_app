@@ -14,7 +14,8 @@ class MyRoundPasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyTextFieldContainer(
-      child: TextField(
+      child: TextFormField(
+        validator: ((value) => value!.length < 6 ? 'Enter a minimum of 6 characters' : null),
         onChanged: onChanged,
         obscureText: true,
         decoration: InputDecoration(

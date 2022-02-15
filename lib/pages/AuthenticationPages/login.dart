@@ -30,40 +30,42 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         height: size.height,
         width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Login',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: size.height * 0.3,),
-            MyRoundedInputField(
-              onChanged: ((value) {
-                setState(() {
-                  email = value;
-                });
-              }),
-              hintText: 'Enter email',
-              icon: Icons.person,
-            ),
-            MyRoundPasswordField(
-              onChanged: ((value) {
-                password = value;
-              }),
-            ),
-            MyCircularTextButton(
-              text: 'Login', 
-              press: () async {
-
-              }
-            ),
-            MyHaveAnAccountCheck(
-              press: () {
-                Navigator.pushReplacementNamed(context, AppRoute.signup);
-              },
-            )
-          ],
+        child: Form(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Login',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: size.height * 0.3,),
+              MyRoundedInputField(
+                onChanged: ((value) {
+                  setState(() {
+                    email = value;
+                  });
+                }),
+                hintText: 'Enter email',
+                icon: Icons.person,
+              ),
+              MyRoundPasswordField(
+                onChanged: ((value) {
+                  password = value;
+                }),
+              ),
+              MyCircularTextButton(
+                text: 'Login', 
+                press: () async {
+        
+                }
+              ),
+              MyHaveAnAccountCheck(
+                press: () {
+                  Navigator.pushReplacementNamed(context, AppRoute.signup);
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

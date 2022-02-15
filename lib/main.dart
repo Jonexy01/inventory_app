@@ -20,9 +20,14 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -37,7 +42,7 @@ class MyApp extends StatelessWidget {
         routes: {
           AppRoute.wrapper:(context) => Wrapper(),
           AppRoute.loading: (context) => Loading(), 
-          AppRoute.home: (context) => Home(title: 'Welcome to Inventory App'),
+          AppRoute.home: (context) => Home(title: 'Inventory App'),
           AppRoute.productsDisplay: (context) => ProductDisplay(),
           AppRoute.lowStock: (context) => LowStockDisplay(),
           AppRoute.welcome: (context) => WelcomeScreen(),

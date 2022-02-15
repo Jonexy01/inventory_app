@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inventory_app/services/auth.dart';
 
 import '../../MyClasses/routes.dart';
 import '../../MyWidgets/my_circular_text_button.dart';
@@ -17,9 +18,13 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
 
+  final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+
   //text field state
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -28,62 +33,80 @@ class _SignupPageState extends State<SignupPage> {
       body: Container(
         width: double.infinity,
         height: size.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Sign up',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Sign up',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            SizedBox(height: size.height * 0.3,),
-            MyRoundedInputField(
-              onChanged: ((value) {
-                email = value;
-              }),
-              hintText: 'Enter email',
-              icon: Icons.person,
-            ),
-            MyRoundPasswordField(
-              onChanged: ((value) {
-                password = value;
-              }),
-            ),
-            MyCircularTextButton(
-              text: 'Sign up', 
-              press: () async {
-                
-              }
-            ),
-            MyHaveAnAccountCheck(
-              login: false,
-              press: () {
-                Navigator.pushReplacementNamed(context, AppRoute.login);
-              },
-            ),
-            OrDivider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 2,
-                      color: Colors.amber,
+              SizedBox(height: size.height * 0.3,),
+              MyRoundedInputField(
+                onChanged: ((value) {
+                  email = value;
+                }),
+                hintText: 'Enter email',
+                icon: Icons.person,
+              ),
+              MyRoundPasswordField(
+                onChanged: ((value) {
+                  password = value;
+                }),
+              ),
+              MyCircularTextButton(
+                text: 'Sign up', 
+                press: () async {
+                  error = '';
+                  if (_formKey.currentState!.validate()) {
+                    dynamic result = await _auth.mySignUpWithEmailPassword(email, password);
+                    if (result == null) {
+                      setState(() {
+                        error = 'Something went wrong';
+                      });
+                    } else {
+                      Navigator.pushReplacementNamed(context, AppRoute.home);
+                    }
+                  }
+                }
+              ),
+              SizedBox(height: 8,),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 14,),
+              ),
+              MyHaveAnAccountCheck(
+                login: false,
+                press: () {
+                  Navigator.pushReplacementNamed(context, AppRoute.login);
+                },
+              ),
+              OrDivider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 2,
+                        color: Colors.amber,
+                      ),
+                      shape: BoxShape.circle,
                     ),
-                    shape: BoxShape.circle,
-                  ),
-                  // child: SvgPicture.asset(
-                  //   'assets/icons/Facebook-f_Logo-Blue-Logo.wine.svg',
-                  //   height: 20,
-                  //   width: 20,
-                  // ),
-                )
-              ],
-            )
-          ],
+                    // child: SvgPicture.asset(
+                    //   'assets/icons/Facebook-f_Logo-Blue-Logo.wine.svg',
+                    //   height: 20,
+                    //   width: 20,
+                    // ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
