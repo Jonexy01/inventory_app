@@ -31,19 +31,22 @@
 </head>
 <body>
 
-  <!-- Insert this script at the bottom of the HTML, but before you use any Firebase services -->
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js'
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
 
-    // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
-    import { analytics } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-analytics.js'
-
-    // Add Firebase products that you want to use
-    import { auth } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js'
-    import { firestore } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js'
-  </script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firrstore.js"></script>
 
   <script>
+    // Import the functions you need from the SDKs you need
+    //import { initializeApp } from "https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js";
+    //import { getAnalytics } from "https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    //import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+    //import {  } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-.js";
+  
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     const firebaseConfig = {
@@ -52,12 +55,13 @@
       projectId: "inventory-app-720e2",
       storageBucket: "inventory-app-720e2.appspot.com",
       messagingSenderId: "430439182152",
-      appId: "1:430439182152:web:cf64ffb0f1f9199091cd7d",
-      measurementId: "G-WGVL7DBREE"
+      appId: "1:430439182152:web:10574c66f19a51d691cd7d",
+      measurementId: "G-TG49M3JXTH"
     };
-
+  
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
   </script>
 
   <!-- This script installs service_worker.js to provide PWA functionality to
