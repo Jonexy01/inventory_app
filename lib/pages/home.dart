@@ -15,9 +15,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   final AuthService _auth = AuthService();
-  
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +24,14 @@ class _HomeState extends State<Home> {
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text(widget.title),
-          actions: [
-            TextButton.icon(
+          actions: <Widget>[
+            IconButton(
               onPressed: () async {
                 await _auth.mySignOut(context, AppRoute.wrapper);
-              }, 
-              icon: Icon(Icons.person), 
-              label: Text('Logout'),
-            )
+              },
+              icon: Icon(Icons.logout),
+              tooltip: 'sign out',
+            ),
           ],
         ),
         body: Container(
@@ -47,15 +45,21 @@ class _HomeState extends State<Home> {
                   children: [
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.all(10),
-                        child: MyTextButtonIcon(myText: "Low Stock", myIcon: Icons.favorite, routeName: AppRoute.lowStock,)
-                      ),
+                          margin: EdgeInsets.all(10),
+                          child: MyTextButtonIcon(
+                            myText: "Low Stock",
+                            myIcon: Icons.favorite,
+                            routeName: AppRoute.lowStock,
+                          )),
                     ),
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.all(10),
-                        child: MyTextButtonIcon(myText: 'Products', myIcon: Icons.accessibility, routeName: AppRoute.productsDisplay,)
-                      ),
+                          margin: EdgeInsets.all(10),
+                          child: MyTextButtonIcon(
+                            myText: 'Products',
+                            myIcon: Icons.accessibility,
+                            routeName: AppRoute.productsDisplay,
+                          )),
                     ),
                   ],
                 ),
