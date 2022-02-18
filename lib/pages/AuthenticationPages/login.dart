@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory_app/MyClasses/routes.dart';
 import 'package:inventory_app/MyWidgets/my_circular_text_button.dart';
 import 'package:inventory_app/MyWidgets/my_text_field_container.dart';
+import 'package:inventory_app/services/auth.dart';
 
 import '../../MyWidgets/my_have_an_account_check.dart';
 import '../../MyWidgets/my_rounded_input_field.dart';
@@ -19,9 +20,13 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+
   //text field state
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +61,29 @@ class _LoginPageState extends State<LoginPage> {
               MyCircularTextButton(
                 text: 'Login', 
                 press: () async {
-        
+                  error = '';
+                  if (_formKey.currentState!.validate()) {
+                    dynamic result = await _auth.mySigninWithEmailPassword(email, password);
+                    if (result == null) {
+                      setState(() {
+                        error = 'Something went wrong';
+                      });
+                    } else {
+                      Navigator.pushReplacementNamed(context, AppRoute.home);
+                    }
+                  }
                 }
               ),
               MyHaveAnAccountCheck(
                 press: () {
                   Navigator.pushReplacementNamed(context, AppRoute.signup);
                 },
-              )
+              ),
+              SizedBox(height: 8,),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 14,),
+              ),
             ],
           ),
         ),

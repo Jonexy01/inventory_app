@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:inventory_app/MyClasses/routes.dart';
 import 'package:inventory_app/MyClasses/user.dart';
 
 class AuthService {
@@ -29,6 +31,16 @@ class AuthService {
   }
 
   //sign in with email and password
+  Future mySigninWithEmailPassword (String email, String password) async {
+    try {
+      UserCredential userInfo = await _auth.signInWithEmailAndPassword(email: email, password: password,);
+      User? user = userInfo.user;
+      return converUsertoMyuser(user);
+    } catch(e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
   //register with email and password
   Future mySignUpWithEmailPassword (String email, String password) async {
@@ -43,9 +55,10 @@ class AuthService {
   }
 
   //sign out
-  Future mySignOut() async {
+  Future mySignOut(BuildContext context, String route) async {
     try {
-      return await _auth.signOut();
+      await _auth.signOut();
+      return Navigator.pushReplacementNamed(context, route);
     } catch(e) {
       print(e.toString());
       return null;

@@ -26,11 +26,11 @@ void main() async {
       measurementId: "G-TG49M3JXTH"
     )
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
         routes: {
           AppRoute.wrapper:(context) => Wrapper(),
           AppRoute.loading: (context) => Loading(), 
-          AppRoute.home: (context) => Home(title: 'Inventory App'),
+          AppRoute.home: (context) => Home(title: 'Welcome to Inventory App'),
           AppRoute.productsDisplay: (context) => ProductDisplay(),
           AppRoute.lowStock: (context) => LowStockDisplay(),
           AppRoute.welcome: (context) => WelcomeScreen(),

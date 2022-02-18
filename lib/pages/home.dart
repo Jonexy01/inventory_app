@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
           actions: [
             TextButton.icon(
               onPressed: () async {
-                await _auth.mySignOut();
+                await _auth.mySignOut(context, AppRoute.wrapper);
               }, 
               icon: Icon(Icons.person), 
               label: Text('Logout'),
