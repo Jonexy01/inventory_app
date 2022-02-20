@@ -16,7 +16,8 @@ import 'package:inventory_app/pages/wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: FirebaseOptions(
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
       apiKey: "AIzaSyAqQQhHRleReWCFv5rmx_oY8NKNdnNCM04",
       authDomain: "inventory-app-720e2.firebaseapp.com",
       projectId: "inventory-app-720e2",

@@ -36,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
         height: size.height,
         width: double.infinity,
         child: Form(
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
