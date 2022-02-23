@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory_app/MyClasses/routes.dart';
 import 'package:inventory_app/MyWidgets/my_circular_text_button.dart';
 import 'package:inventory_app/MyWidgets/my_text_field_container.dart';
+import 'package:inventory_app/pages/waiting.dart';
 import 'package:inventory_app/services/auth.dart';
 
 import '../../MyWidgets/my_have_an_account_check.dart';
@@ -22,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool waiting = false;
 
   //text field state
   String email = '';
@@ -31,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
+    return waiting ? WaitingPage() : Scaffold(
       body: Container(
         height: size.height,
         width: double.infinity,
@@ -64,10 +66,14 @@ class _LoginPageState extends State<LoginPage> {
                 press: () async {
                   error = '';
                   if (_formKey.currentState!.validate()) {
+                    setState(() {
+                      waiting = true;
+                    });
                     dynamic result = await _auth.mySigninWithEmailPassword(email, password);
                     if (result == null) {
                       setState(() {
                         error = 'Something went wrong';
+                        waiting = false;
                       });
                     } else {
                       Navigator.pushReplacementNamed(context, AppRoute.home);

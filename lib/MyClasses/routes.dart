@@ -14,6 +14,7 @@ class AppRoute {
   static const String signup = '/signin';
   static const String wrapper = '/wrapper';
   static const String roleSelect = '/roleSelect';
+  static const String waiting = '/waiting';
 
   // Copied code below keeps some pages in a Map
   

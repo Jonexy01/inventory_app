@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inventory_app/pages/home.dart';
+import 'package:inventory_app/pages/waiting.dart';
 import 'package:inventory_app/services/auth.dart';
 
 import '../../MyClasses/routes.dart';
@@ -20,6 +22,7 @@ class _SignupPageState extends State<SignupPage> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool waiting = false;
 
   //text field state
   String email = '';
@@ -29,7 +32,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
+    return waiting ? WaitingPage() : Scaffold(
       body: Container(
         width: double.infinity,
         height: size.height,
@@ -62,10 +65,14 @@ class _SignupPageState extends State<SignupPage> {
                 press: () async {
                   error = '';
                   if (_formKey.currentState!.validate()) {
+                    setState(() {
+                      waiting = true;
+                    });
                     dynamic result = await _auth.mySignUpWithEmailPassword(email, password);
                     if (result == null) {
                       setState(() {
                         error = 'Something went wrong';
+                        waiting = false;
                       });
                     } else {
                       Navigator.pushReplacementNamed(context, AppRoute.roleSelect);
