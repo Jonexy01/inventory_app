@@ -68,7 +68,7 @@ class _SignupPageState extends State<SignupPage> {
                         error = 'Something went wrong';
                       });
                     } else {
-                      Navigator.pushReplacementNamed(context, AppRoute.home);
+                      Navigator.pushReplacementNamed(context, AppRoute.roleSelect);
                     }
                   }
                 }
