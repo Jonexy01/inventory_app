@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_app/MyClasses/user.dart';
+import 'package:inventory_app/MyClasses/user_data_collection.dart';
 import 'package:inventory_app/pages/AuthenticationPages/role_select.dart';
 import 'package:inventory_app/pages/waiting.dart';
 import 'package:inventory_app/services/auth.dart';
+import 'package:inventory_app/services/database.dart';
 import 'package:provider/provider.dart';
 
 import 'package:inventory_app/MyClasses/routes.dart';
@@ -54,7 +56,11 @@ class _MyAppState extends State<MyApp> {
         routes: {
           AppRoute.wrapper:(context) => Wrapper(),
           AppRoute.loading: (context) => Loading(), 
-          AppRoute.home: (context) => Home(title: 'Welcome'),
+          AppRoute.home: (context) => StreamProvider<MyUserData?>.value(
+            value: DatabaseService().currentUserDocument,
+            initialData: null,
+            child: Home(title: 'Welcome')
+          ),
           AppRoute.productsDisplay: (context) => ProductDisplay(),
           AppRoute.lowStock: (context) => LowStockDisplay(),
           AppRoute.welcome: (context) => WelcomeScreen(),
