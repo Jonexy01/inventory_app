@@ -10,30 +10,32 @@ class RoleSelectPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Flexible(child: Container()),
-          Text('Please choose your role'),
-          Flexible(child: Container()),
-          MyCircularTextButton(
-            color: Colors.purple.shade600,
-            text: 'Create as admin', 
-            press: () {
-              Navigator.pushReplacementNamed(context, AppRoute.home);
-            }
-          ),
-          MyCircularTextButton(
-            color: Colors.purple.shade300,
-            text: 'Join an existing business', 
-            press: () {
-              
-            }
-          ),
-          SizedBox(
-            height: 40,
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Spacer(),
+            Text('Please choose your role'),
+            Spacer(),
+            MyCircularTextButton(
+              color: Colors.purple.shade600,
+              text: 'Create as admin', 
+              press: () {
+                Navigator.pushReplacementNamed(context, AppRoute.home);
+              }
+            ),
+            MyCircularTextButton(
+              color: Colors.purple.shade300,
+              text: 'Join an existing business', 
+              press: () {
+                
+              }
+            ),
+            SizedBox(
+              height: 40,
+            ),
+          ],
+        ),
       ),
     );
   }

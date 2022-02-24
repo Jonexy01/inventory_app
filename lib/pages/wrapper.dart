@@ -18,7 +18,7 @@ class Wrapper extends StatelessWidget {
     if (currentUser == null) {
       return WelcomeScreen();
     } else {
-      return Home(title: 'Welcome to Inventory App');
+      return Home(title: 'Welcome');
     }
     
   }

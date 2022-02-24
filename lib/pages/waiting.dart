@@ -7,7 +7,7 @@ class WaitingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.purple.shade300,
+      color: Colors.purple.shade50,
       child: Center(
         child: SpinKitChasingDots(
           color: Colors.amber,
