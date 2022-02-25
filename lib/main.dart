@@ -56,9 +56,9 @@ class _MyAppState extends State<MyApp> {
         routes: {
           AppRoute.wrapper:(context) => Wrapper(),
           AppRoute.loading: (context) => Loading(), 
-          AppRoute.home: (context) => StreamProvider<MyUserData?>.value(
+          AppRoute.home: (context) => StreamProvider<MyUserData>.value(
             value: DatabaseService().currentUserDocument,
-            initialData: null,
+            initialData: MyUserData(name: ''),
             child: Home(title: 'Welcome')
           ),
           AppRoute.productsDisplay: (context) => ProductDisplay(),

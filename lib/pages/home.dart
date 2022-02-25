@@ -24,13 +24,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    String nameOfUser = (Provider.of<MyUserData?>(context))!.name ?? 'not available';
+    //String nameOfUser = (Provider.of<MyUserData?>(context))!.name ?? 'not available';
+    MyUserData myVariable = Provider.of<MyUserData>(context);
+    String? nameOfUser = myVariable.name;
 
     return Scaffold(
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title! + ' ' + nameOfUser),
+          title: Text(widget.title! + ' ' + nameOfUser!),
           actions: <Widget>[
             IconButton(
               onPressed: () async {
