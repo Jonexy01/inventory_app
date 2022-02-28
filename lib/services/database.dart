@@ -32,27 +32,14 @@ class DatabaseService {
   }
 
   ///Current userdata document from snapshot.
-  MyUserData _currentUserDataFromSnapshot(QuerySnapshot snapshot) {
+  MyUserData _currentUserDataFromSnapshot(DocumentSnapshot snapshot,) {
 
-    //collect documents in collection snapshot as a list
-    List<MyUserData> docData = snapshot.docs.map((doc) {
-      return MyUserData(
-        name: (doc.data()! as dynamic)['name'] ?? '',
-        businessType: (doc.data() as dynamic)['businessType'] ?? '',
-        status: (doc.data() as dynamic)['status'] ?? '',
-        // businessType: doc.get('businessType') ?? '',
-        // status: doc.get('status') ?? '',
-      );
-    }).toList();
-
-    return docData[0];
-
-    // DocumentSnapshot docSnapshot = snapshot.docs[0];
-    // return MyUserData(
-    //   name: docSnapshot.get('name') ?? '',
-    //   businessType: docSnapshot.get('businessType') ?? '',
-    //   status: docSnapshot.get('status') ?? '',
-    //);
+    return MyUserData(
+        name: (snapshot.data()! as dynamic)['name'] ?? '',
+        businessType: (snapshot.data()! as dynamic)['businessType'] ?? '',
+        status: (snapshot.data()! as dynamic)['status'] ?? '',
+    );
+    
   }
 
   ///get userData stream
@@ -63,7 +50,7 @@ class DatabaseService {
 
   ///get userData document stream
   Stream<MyUserData> get currentUserDocument {
-    return appUser.snapshots()
-      .map(_currentUserDataFromSnapshot);
+    return appUser.doc(uid).snapshots()
+    .map(_currentUserDataFromSnapshot);
   }
 }

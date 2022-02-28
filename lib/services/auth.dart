@@ -8,19 +8,19 @@ class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // create myuser object based on User (FirebaseUser)
+  /// create myuser object based on User (FirebaseUser)
   MyUser? converUsertoMyuser(User? user){
     return user != null ? MyUser(uid: user.uid) : null;
   }
 
-  //Auth change user stream
+  ///Auth change user stream
   Stream<MyUser?> get user {
     return _auth.authStateChanges()
     //.map((User? user) => converUsertoMyuser(user));
     .map(converUsertoMyuser);
   }
 
-  //sign in anom
+  ///sign in anom
   Future mySignInAnon() async {
     try{
       UserCredential userInfo = await _auth.signInAnonymously();
@@ -31,7 +31,7 @@ class AuthService {
     }
   }
 
-  //sign in with email and password
+  ///sign in with email and password
   Future mySigninWithEmailPassword (String email, String password) async {
     try {
       UserCredential userInfo = await _auth.signInWithEmailAndPassword(email: email, password: password,);
@@ -43,7 +43,7 @@ class AuthService {
     }
   }
 
-  //register with email and password
+  ///register with email and password
   Future mySignUpWithEmailPassword (String email, String password) async {
     try {
       UserCredential userInfo = await _auth.createUserWithEmailAndPassword(email: email, password: password,);
@@ -58,7 +58,7 @@ class AuthService {
     }
   }
 
-  //sign out
+  ///sign out
   Future mySignOut(BuildContext context, String route) async {
     try {
       await _auth.signOut();
