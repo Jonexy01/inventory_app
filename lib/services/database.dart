@@ -32,7 +32,7 @@ class DatabaseService {
   }
 
   ///Current userdata document from snapshot.
-  MyUserData _currentUserDataFromSnapshot(DocumentSnapshot snapshot,) {
+  MyUserData _userDataDocumentFromSnapshot(DocumentSnapshot snapshot,) {
 
     return MyUserData(
         name: (snapshot.data()! as dynamic)['name'] ?? '',
@@ -51,6 +51,6 @@ class DatabaseService {
   ///get userData document stream
   Stream<MyUserData> get currentUserDocument {
     return appUser.doc(uid).snapshots()
-    .map(_currentUserDataFromSnapshot);
+    .map(_userDataDocumentFromSnapshot);
   }
 }
