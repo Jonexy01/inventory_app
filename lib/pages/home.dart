@@ -4,7 +4,7 @@ import 'package:inventory_app/MyClasses/routes.dart';
 
 import 'package:inventory_app/MyWidgets/my_text_button_icon.dart';
 import 'package:inventory_app/MyClasses/table_head.dart';
-import 'package:inventory_app/pages/loading.dart';
+import 'package:inventory_app/pages/waiting.dart';
 import 'package:inventory_app/services/auth.dart';
 import 'package:inventory_app/services/database.dart';
 import 'package:provider/provider.dart';
