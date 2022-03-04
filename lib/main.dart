@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory_app/MyClasses/user.dart';
 import 'package:inventory_app/MyClasses/user_data_collection.dart';
 import 'package:inventory_app/pages/AuthenticationPages/role_select.dart';
+import 'package:inventory_app/pages/AuthenticationPages/status_select.dart';
 import 'package:inventory_app/pages/waiting.dart';
 import 'package:inventory_app/services/auth.dart';
 import 'package:inventory_app/services/database.dart';
@@ -64,6 +65,7 @@ class _MyAppState extends State<MyApp> {
           AppRoute.signup:(context) => SignupPage(),
           AppRoute.roleSelect:(context) => RoleSelectPage(),
           AppRoute.waiting: (context) => WaitingPage(),
+          AppRoute.statusSelect:(context) => StatusSelectPage(),
         },
       ),
     );

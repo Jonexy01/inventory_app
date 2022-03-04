@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:inventory_app/MyWidgets/my_circular_text_button.dart';
 import 'package:inventory_app/MyWidgets/my_have_an_account_check.dart';
 
+import '../../MyClasses/routes.dart';
 import '../../MyWidgets/my_rounded_input_field.dart';
 
-class ManagerStatus extends StatefulWidget {
-  const ManagerStatus({ Key? key }) : super(key: key);
+class StatusSelectPage extends StatefulWidget {
+  const StatusSelectPage({ Key? key }) : super(key: key);
 
   @override
-  _ManagerStatusState createState() => _ManagerStatusState();
+  _StatusSelectPageState createState() => _StatusSelectPageState();
 }
 
-class _ManagerStatusState extends State<ManagerStatus> {
+class _StatusSelectPageState extends State<StatusSelectPage> {
 
   final _formKey = GlobalKey<FormState>();
 
@@ -84,7 +85,9 @@ class _ManagerStatusState extends State<ManagerStatus> {
               Spacer(),
               MyCircularTextButton(
                 text: '', 
-                press: () {},
+                press: () {
+                  Navigator.pushReplacementNamed(context, AppRoute.home);
+                },
               ),
               Spacer(),
             ],

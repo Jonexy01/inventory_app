@@ -75,7 +75,7 @@ class _SignupPageState extends State<SignupPage> {
                         waiting = false;
                       });
                     } else {
-                      Navigator.pushReplacementNamed(context, AppRoute.roleSelect);
+                      Navigator.pushReplacementNamed(context, AppRoute.statusSelect);
                     }
                   }
                 }
