@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/MyWidgets/my_circular_text_button.dart';
 import 'package:inventory_app/MyWidgets/my_have_an_account_check.dart';
+import 'package:inventory_app/services/database.dart';
 
 import '../../MyClasses/routes.dart';
+import '../../MyClasses/user.dart';
 import '../../MyWidgets/my_rounded_input_field.dart';
+import 'package:provider/provider.dart';
 
 class StatusSelectPage extends StatefulWidget {
   const StatusSelectPage({ Key? key }) : super(key: key);
@@ -26,6 +29,10 @@ class _StatusSelectPageState extends State<StatusSelectPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final currentUser = Provider.of<MyUser?>(context);
+    DatabaseService dbInstance = DatabaseService(uid: currentUser!.uid);
+
     return Scaffold(
       body: Container(
         child: Form(
@@ -85,9 +92,22 @@ class _StatusSelectPageState extends State<StatusSelectPage> {
               Spacer(),
               MyCircularTextButton(
                 text: '', 
-                press: () {
-                  Navigator.pushReplacementNamed(context, AppRoute.home);
+                press: () async {
+                  if(status == 'Manager') {
+                    await dbInstance.updateUserData(
+                      name, businessName, status
+                      );
+                    Navigator.pushReplacementNamed(context, AppRoute.home);
+                  } else if(status == 'Staff') {
+                    Navigator.pushReplacementNamed(context, AppRoute.home);
+                  } else{
+                    error = 'Something went wrong';
+                  }
                 },
+              ),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 14,),
               ),
               Spacer(),
             ],
