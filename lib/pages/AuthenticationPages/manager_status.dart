@@ -19,6 +19,8 @@ class _ManagerStatusState extends State<ManagerStatus> {
   String name = '';
   String businessName = '';
   String status = '';
+  String managerEmail = '';
+  bool isStaffSelected = false;
   String error = '';
 
   @override
@@ -62,10 +64,23 @@ class _ManagerStatusState extends State<ManagerStatus> {
                     });
                   }
                 },
+                onTap: () {
+                  if(status == 'Staff') {
+                    setState(() {
+                      isStaffSelected = true;
+                    });
+                  }
+                },
                 iconSize: 20,
                 iconEnabledColor: Colors.amber,
                 isExpanded: true,
               ),
+              isStaffSelected ? MyRoundedInputField(
+                onChanged: (value) {
+                  managerEmail = value;
+                },
+                hintText: 'Enter manager\'s email',
+              ) : Container(),
               Spacer(),
               MyCircularTextButton(
                 text: '', 
