@@ -60,6 +60,7 @@ class _StatusSelectPageState extends State<StatusSelectPage> {
               SizedBox(height: 10,),
               DropdownButtonFormField(
                 items: [
+                  DropdownMenuItem(child: Text('Select status'), value: '',),
                   DropdownMenuItem(child: Text('Manager'), value: 'Manager',),
                   DropdownMenuItem(child: Text('Staff'), value: 'Staff',),
                 ], 
