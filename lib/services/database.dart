@@ -12,12 +12,23 @@ class DatabaseService {
   final CollectionReference appUser = FirebaseFirestore.instance.collection('userData');
 
   ///update or create userData collection document in firestore
-  Future updateUserData(String name, String businessType, String status) async {
+  Future updateUserData(String name, String businessName, String email, String status) async {
     return await appUser.doc(uid).set({
       name: name,
-      businessType: businessType,
+      businessName: businessName,
       status: status,
+      email: email,
     });
+  }
+
+  ///update the name and role of userData collection document in firestore
+  Future updateUserDataNameRole({required String name, String? businessName, required String status}) async {
+    if (businessName == null) {
+      return await appUser.doc(uid).update({"name": name, "status": status});
+    } else {
+      return await appUser.doc(uid).update({"name": name, "status": status, businessName: businessName});
+    }
+    
   }
 
   ///all userData from snapshot
@@ -27,6 +38,7 @@ class DatabaseService {
         name: (doc.data()! as dynamic)['name'] ?? '',
         businessType: (doc.data() as dynamic)['businessType'] ?? '',
         status: (doc.data() as dynamic)['status'] ?? '',
+        email: (doc.data() as dynamic)['email'] ?? '',
       );
     }).toList();
   }
@@ -38,6 +50,7 @@ class DatabaseService {
         name: (snapshot.data()! as dynamic)['name'] ?? '',
         businessType: (snapshot.data()! as dynamic)['businessType'] ?? '',
         status: (snapshot.data()! as dynamic)['status'] ?? '',
+        email: (snapshot.data()! as dynamic)['email'] ?? '',
     );
     
   }
@@ -52,5 +65,19 @@ class DatabaseService {
   Stream<MyUserData> get currentUserDocument {
     return appUser.doc(uid).snapshots()
     .map(_userDataDocumentFromSnapshot);
+  }
+
+  ///update or create a user subcollection under another user collection
+  Future createSubuserUnderUser (String name, String managerEmail, String status) async {
+    try {
+      QuerySnapshot managerCollection = await appUser.where('email', isEqualTo: managerEmail).get();
+      DocumentSnapshot managerDoc = managerCollection.docs[0];
+      String managerUID = managerDoc.id;
+      appUser.doc(managerUID).collection('staff').doc(uid).set({
+        name: name,
+      });
+    } catch (e) {
+      return null;
+    } 
   }
 }

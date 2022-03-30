@@ -69,7 +69,15 @@ class _LoginPageState extends State<LoginPage> {
                     setState(() {
                       waiting = true;
                     });
-                    dynamic result = await _auth.mySigninWithEmailPassword(email, password);
+                    dynamic result = await Future.any([
+                      _auth.mySigninWithEmailPassword(email, password),
+                      Future.delayed(const Duration(seconds: 20), () {
+                        setState(() {
+                          error = "It is taking too long. Contact admin if network is okay";
+                          waiting = false;
+                        });
+                      })
+                    ]);
                     if (result == null) {
                       setState(() {
                         error = 'Something went wrong';

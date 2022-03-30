@@ -8,6 +8,8 @@ import '../../MyClasses/user.dart';
 import '../../MyWidgets/my_rounded_input_field.dart';
 import 'package:provider/provider.dart';
 
+import '../waiting.dart';
+
 class StatusSelectPage extends StatefulWidget {
   const StatusSelectPage({ Key? key }) : super(key: key);
 
@@ -18,6 +20,7 @@ class StatusSelectPage extends StatefulWidget {
 class _StatusSelectPageState extends State<StatusSelectPage> {
 
   final _formKey = GlobalKey<FormState>();
+  bool waiting = false;
 
   //text field state
   String name = '';
@@ -33,7 +36,7 @@ class _StatusSelectPageState extends State<StatusSelectPage> {
     final currentUser = Provider.of<MyUser?>(context);
     DatabaseService dbInstance = DatabaseService(uid: currentUser!.uid);
 
-    return Scaffold(
+    return waiting ? WaitingPage() : Scaffold(
       body: Container(
         child: Form(
           key: _formKey,
@@ -43,26 +46,29 @@ class _StatusSelectPageState extends State<StatusSelectPage> {
               Text('Please provide your details'),
               Spacer(),
               Spacer(),
-              MyRoundedInputField(
-                onChanged: ((value) {
-                  name = value;
-                }),
-                hintText: 'Enter your name',
-                icon: Icons.person,
-              ),
-              SizedBox(height: 10,),
-              MyRoundedInputField(
-                onChanged: ((value) {
-                  businessName = value;
-                }),
-                hintText: 'Enter your business name',
-              ),
-              SizedBox(height: 10,),
               DropdownButtonFormField(
                 items: [
-                  DropdownMenuItem(child: Text('Select status'), value: '',),
-                  DropdownMenuItem(child: Text('Manager'), value: 'Manager',),
-                  DropdownMenuItem(child: Text('Staff'), value: 'Staff',),
+                  DropdownMenuItem(
+                    child: Text('Select status'), 
+                    value: '',
+                    onTap: () {setState(() {
+                      isStaffSelected = false;
+                    });},
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Manager'), 
+                    value: 'Manager',
+                    onTap: () {setState(() {
+                      isStaffSelected = false;
+                    });},
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Staff'), 
+                    value: 'Staff',
+                    onTap: () {setState(() {
+                      isStaffSelected = true;
+                    });},
+                  ),
                 ], 
                 value: status,
                 hint: Text('Select your status'),
@@ -73,37 +79,63 @@ class _StatusSelectPageState extends State<StatusSelectPage> {
                     });
                   }
                 },
-                onTap: () {
-                  if(status == 'Staff') {
-                    setState(() {
-                      isStaffSelected = true;
-                    });
-                  }
-                },
                 iconSize: 20,
                 iconEnabledColor: Colors.amber,
                 isExpanded: true,
               ),
+              SizedBox(height: 10,),
+              MyRoundedInputField(
+                onChanged: ((value) {
+                  name = value;
+                }),
+                hintText: 'Enter your name',
+                icon: Icons.person,
+              ),
+              SizedBox(height: 10,),
               isStaffSelected ? MyRoundedInputField(
                 onChanged: (value) {
                   managerEmail = value;
                 },
                 hintText: 'Enter manager\'s email',
-              ) : Container(),
+              ) : MyRoundedInputField(
+                onChanged: ((value) {
+                  businessName = value;
+                }),
+                hintText: 'Enter your business name',
+              ),
               Spacer(),
               MyCircularTextButton(
-                text: '', 
+                text: 'Continue', 
                 press: () async {
-                  if(status == 'Manager') {
-                    await dbInstance.updateUserData(
-                      name, businessName, status
+                  if (_formKey.currentState!.validate()) {
+                    setState(() {
+                      waiting = true;
+                    });
+                    if(status == 'Manager') {
+                      await dbInstance.updateUserDataNameRole(
+                        name: name, status: status, businessName: businessName
                       );
-                    Navigator.pushReplacementNamed(context, AppRoute.home);
-                  } else if(status == 'Staff') {
-                    Navigator.pushReplacementNamed(context, AppRoute.home);
-                  } else{
-                    error = 'Something went wrong';
+                      Navigator.pushReplacementNamed(context, AppRoute.home);
+                    } else if(status == 'Staff') {
+                      await dbInstance.updateUserDataNameRole(name: name, status: status);
+                      dynamic linkManager = await dbInstance.createSubuserUnderUser(name, managerEmail, status);
+                      if (linkManager == null) {
+                        setState(() {
+                          error = 'Something went wrong. Ensure Manager;s email is correct';
+                          waiting = false;
+                        });
+                      } else {
+                        Navigator.pushReplacementNamed(context, AppRoute.home);
+                      }
+                    } else{
+                      setState(() {
+                        error = 'Something went wrong';
+                        waiting = false;
+                      });
+                      
+                    }
                   }
+                  
                 },
               ),
               Text(
