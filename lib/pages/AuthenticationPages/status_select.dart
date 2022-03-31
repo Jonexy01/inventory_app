@@ -119,9 +119,14 @@ class _StatusSelectPageState extends State<StatusSelectPage> {
                     } else if(status == 'Staff') {
                       await dbInstance.updateUserDataNameRole(name: name, status: status);
                       dynamic linkManager = await dbInstance.createSubuserUnderUser(name, managerEmail, status);
-                      if (linkManager == null) {
+                      if (linkManager == SubUserResult.errorEncountered) {
                         setState(() {
                           error = 'Something went wrong. Ensure Manager;s email is correct';
+                          waiting = false;
+                        });
+                      } else if (linkManager == SubUserResult.notManagerEmail) {
+                        setState(() {
+                          error = 'Something went wrong. Provided email may not belong to a Manager';
                           waiting = false;
                         });
                       } else {

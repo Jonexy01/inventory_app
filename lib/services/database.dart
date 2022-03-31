@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:inventory_app/MyClasses/user_data_collection.dart';
 
+enum SubUserResult {errorEncountered, notManagerEmail}
+
 class DatabaseService {
 
   final String? uid;
@@ -69,15 +71,24 @@ class DatabaseService {
 
   ///update or create a user subcollection under another user collection
   Future createSubuserUnderUser (String name, String managerEmail, String status) async {
+    SubUserResult subUserResult;
     try {
       QuerySnapshot managerCollection = await appUser.where('email', isEqualTo: managerEmail).get();
       DocumentSnapshot managerDoc = managerCollection.docs[0];
       String managerUID = managerDoc.id;
-      appUser.doc(managerUID).collection('staff').doc(uid).set({
-        name: name,
-      });
+      String _role = managerDoc['status'];
+      if (_role == 'Manager') {
+        appUser.doc(managerUID).collection('staff').doc(uid).set({
+          name: name,
+        });
+      }
+      else {
+        subUserResult = SubUserResult.notManagerEmail;
+        return subUserResult;
+      }
     } catch (e) {
-      return null;
+      subUserResult = SubUserResult.errorEncountered;
+      return subUserResult;
     } 
   }
 }
