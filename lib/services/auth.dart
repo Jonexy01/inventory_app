@@ -50,7 +50,7 @@ class AuthService {
       User? user = userInfo.user;
 
       //create a new document for the user with the uid
-      await DatabaseService(uid: user!.uid).updateUserData('name', 'businessName', email, 'Manager');
+      await DatabaseService(uid: user!.uid).updateUserData('name', email,);
       return converUsertoMyuser(user);
     } catch(e) {
       print(e.toString());

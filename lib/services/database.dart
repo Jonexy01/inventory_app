@@ -14,12 +14,10 @@ class DatabaseService {
   final CollectionReference appUser = FirebaseFirestore.instance.collection('userData');
 
   ///update or create userData collection document in firestore
-  Future updateUserData(String name, String businessName, String email, String status) async {
+  Future updateUserData(String name, String email,) async {
     return await appUser.doc(uid).set({
-      name: name,
-      businessName: businessName,
-      status: status,
-      email: email,
+      "name": name,
+      "email": email,
     });
   }
 
@@ -28,7 +26,7 @@ class DatabaseService {
     if (businessName == null) {
       return await appUser.doc(uid).update({"name": name, "status": status});
     } else {
-      return await appUser.doc(uid).update({"name": name, "status": status, businessName: businessName});
+      return await appUser.doc(uid).update({"name": name, "status": status, "businessName": businessName});
     }
     
   }
@@ -38,7 +36,7 @@ class DatabaseService {
     return snapshot.docs.map((doc) {
       return MyUserData(
         name: (doc.data()! as dynamic)['name'] ?? '',
-        businessType: (doc.data() as dynamic)['businessType'] ?? '',
+        businessType: (doc.data() as dynamic)['businessName'] ?? '',
         status: (doc.data() as dynamic)['status'] ?? '',
         email: (doc.data() as dynamic)['email'] ?? '',
       );
@@ -50,7 +48,7 @@ class DatabaseService {
 
     return MyUserData(
         name: (snapshot.data()! as dynamic)['name'] ?? '',
-        businessType: (snapshot.data()! as dynamic)['businessType'] ?? '',
+        businessType: (snapshot.data()! as dynamic)['businessName'] ?? '',
         status: (snapshot.data()! as dynamic)['status'] ?? '',
         email: (snapshot.data()! as dynamic)['email'] ?? '',
     );
@@ -79,7 +77,7 @@ class DatabaseService {
       String _role = managerDoc['status'];
       if (_role == 'Manager') {
         appUser.doc(managerUID).collection('staff').doc(uid).set({
-          name: name,
+          "name": name,
         });
       }
       else {
