@@ -1,0 +1,1 @@
+enum Loader { loading, loadingmore, error, loadingMoreDone, idle, loaded }

@@ -3,14 +3,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:inventory_app/MyClasses/routes.dart';
-import 'package:inventory_app/MyWidgets/my_circular_text_button.dart';
-import 'package:inventory_app/MyWidgets/my_text_field_container.dart';
-import 'package:inventory_app/pages/waiting.dart';
-import 'package:inventory_app/services/auth.dart';
+import 'package:inventory_app/widgets/my_circular_text_button.dart';
+import 'package:inventory_app/presentation/waiting.dart';
+import 'package:inventory_app/core/services/auth.dart';
 
-import '../../MyWidgets/my_have_an_account_check.dart';
-import '../../MyWidgets/my_rounded_input_field.dart';
-import '../../MyWidgets/my_rounded_password_field.dart';
+import '../../../Widgets/my_have_an_account_check.dart';
+import '../../../Widgets/my_rounded_input_field.dart';
+import '../../../Widgets/my_rounded_password_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({ Key? key }) : super(key: key);
@@ -42,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Login',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -94,10 +93,10 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.pushReplacementNamed(context, AppRoute.signup);
                 },
               ),
-              SizedBox(height: 8,),
+              const SizedBox(height: 8,),
               Text(
                 error,
-                style: TextStyle(color: Colors.red, fontSize: 14,),
+                style: const TextStyle(color: Colors.red, fontSize: 14,),
               ),
             ],
           ),

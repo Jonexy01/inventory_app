@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/MyClasses/routes.dart';
-import 'package:inventory_app/MyWidgets/my_circular_text_button.dart';
-import 'package:inventory_app/services/auth.dart';
+import 'package:inventory_app/widgets/my_circular_text_button.dart';
 
 
 class RoleSelectPage extends StatelessWidget {

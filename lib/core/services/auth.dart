@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:inventory_app/MyClasses/routes.dart';
-import 'package:inventory_app/MyClasses/user.dart';
-import 'package:inventory_app/services/database.dart';
+import 'package:inventory_app/core/models/user.dart';
+import 'package:inventory_app/core/services/database.dart';
 
 class AuthService {
 

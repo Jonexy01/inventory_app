@@ -1,27 +1,26 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_app/MyClasses/routes.dart';
 
-import 'package:inventory_app/MyWidgets/my_text_button_icon.dart';
+import 'package:inventory_app/widgets/my_text_button_icon.dart';
 import 'package:inventory_app/MyClasses/table_head.dart';
-import 'package:inventory_app/pages/waiting.dart';
-import 'package:inventory_app/services/auth.dart';
-import 'package:inventory_app/services/database.dart';
+import 'package:inventory_app/presentation/waiting.dart';
+import 'package:inventory_app/core/services/auth.dart';
+import 'package:inventory_app/core/services/database.dart';
 import 'package:provider/provider.dart';
-import 'package:inventory_app/MyClasses/user_data_collection.dart';
+import 'package:inventory_app/core/models/user_data_collection.dart';
 
-import '../MyClasses/user.dart';
+import '../../../core/models/user.dart';
 
-class Home extends StatefulWidget {
-  Home({Key? key, this.title}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key,}) : super(key: key);
 
-  String? title = 'Welcome';
+  //String? title = 'Welcome';
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeState extends State<Home> {
+class _HomePageState extends State<HomePage> {
   
   final AuthService _auth = AuthService();
 
@@ -45,13 +44,13 @@ class _HomeState extends State<Home> {
             appBar: AppBar(
               // Here we take the value from the MyHomePage object that was created by
               // the App.build method, and use it to set our appbar title.
-              title: Text(widget.title! + ' ' + userDoc!.name!),
+              title: Text('Welcome ' + userDoc!.name!),
               actions: <Widget>[
                 IconButton(
                   onPressed: () async {
                     await _auth.mySignOut(context, AppRoute.wrapper);
                   },
-                  icon: Icon(Icons.logout),
+                  icon: const Icon(Icons.logout),
                   tooltip: 'sign out',
                 ),
               ],
@@ -60,14 +59,14 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     //width: double.infinity,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Expanded(
                           child: Container(
-                              margin: EdgeInsets.all(10),
+                              margin: const EdgeInsets.all(10),
                               child: MyTextButtonIcon(
                                 myText: "Low Stock",
                                 myIcon: Icons.favorite,
@@ -76,7 +75,7 @@ class _HomeState extends State<Home> {
                         ),
                         Expanded(
                           child: Container(
-                              margin: EdgeInsets.all(10),
+                              margin: const EdgeInsets.all(10),
                               child: MyTextButtonIcon(
                                 myText: 'Products',
                                 myIcon: Icons.accessibility,
@@ -92,7 +91,7 @@ class _HomeState extends State<Home> {
                     endIndent: 20,
                     height: 20,
                   ),
-                  Center(
+                  const Center(
                     child: Text(
                       "Last sales transations",
                       style: TextStyle(
@@ -101,9 +100,9 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     child: Table(
-                      border: TableBorder(
+                      border: const TableBorder(
                         verticalInside: BorderSide(
                           color: Colors.purple,
                           style: BorderStyle.solid,
@@ -119,7 +118,7 @@ class _HomeState extends State<Home> {
             )
           );
         } else {
-          return WaitingPage();
+          return const WaitingPage();
         }
         
       }

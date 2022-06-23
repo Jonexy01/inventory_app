@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/MyClasses/user.dart';
-import 'package:inventory_app/pages/AuthenticationPages/welcome_page.dart';
-import 'package:inventory_app/pages/loading.dart';
+import 'package:inventory_app/core/models/user.dart';
+import 'package:inventory_app/presentation/Splash/landing_page.dart';
 import 'package:provider/provider.dart';
 
-import 'home.dart';
+import '../home/homepage/home_page.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({ Key? key }) : super(key: key);
@@ -16,9 +15,9 @@ class Wrapper extends StatelessWidget {
 
     //return either home or authenticate widget
     if (currentUser == null) {
-      return WelcomeScreen();
+      return LandingPage();
     } else {
-      return Home(title: 'Welcome');
+      return HomePage();
     }
     
   }

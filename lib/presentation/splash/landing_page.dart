@@ -1,10 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:inventory_app/MyClasses/routes.dart';
+import 'package:inventory_app/router/app_router.dart';
 
-import '../../MyWidgets/my_circular_text_button.dart';
+import '../../widgets/my_circular_text_button.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({ Key? key }) : super(key: key);
+class LandingPage extends StatelessWidget {
+  const LandingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,21 +17,29 @@ class WelcomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Welcome to Inventory App',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: size.height * 0.3,),
+            SizedBox(
+              height: size.height * 0.3,
+            ),
             MyCircularTextButton(
               text: 'Login',
-              press: () {Navigator.pushReplacementNamed(context, AppRoute.login);},
+              press: () {
+                context.router.push(const LoginPageRoute());
+                //Navigator.pushReplacementNamed(context, AppRoute.login);
+              },
               color: Colors.purple.shade400,
             ),
             MyCircularTextButton(
-              text: 'Sign up', 
-              press: () {Navigator.pushReplacementNamed(context, AppRoute.signup);},
+              text: 'Sign up',
+              press: () {
+                context.router.push(const SignupPageRoute());
+                //Navigator.pushReplacementNamed(context, AppRoute.signup);
+              },
               color: Colors.purple.shade100,
               textColor: Colors.black,
             )
@@ -40,4 +49,3 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 }
-

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:inventory_app/pages/home.dart';
-import 'package:inventory_app/pages/waiting.dart';
-import 'package:inventory_app/services/auth.dart';
+import 'package:inventory_app/presentation/waiting.dart';
+import 'package:inventory_app/core/services/auth.dart';
 
-import '../../MyClasses/routes.dart';
-import '../../MyWidgets/my_circular_text_button.dart';
-import '../../MyWidgets/my_have_an_account_check.dart';
-import '../../MyWidgets/my_rounded_input_field.dart';
-import '../../MyWidgets/my_rounded_password_field.dart';
-import '../../MyWidgets/or_divider.dart';
+import '../../../MyClasses/routes.dart';
+import '../../../widgets/my_circular_text_button.dart';
+import '../../../widgets/my_have_an_account_check.dart';
+import '../../../widgets/my_rounded_input_field.dart';
+import '../../../widgets/my_rounded_password_field.dart';
+import '../../../widgets/or_divider.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({ Key? key }) : super(key: key);

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/MyWidgets/my_circular_text_button.dart';
-import 'package:inventory_app/MyWidgets/my_have_an_account_check.dart';
-import 'package:inventory_app/services/database.dart';
+import 'package:inventory_app/Widgets/my_circular_text_button.dart';
+import 'package:inventory_app/core/services/database.dart';
 
 import '../../MyClasses/routes.dart';
-import '../../MyClasses/user.dart';
-import '../../MyWidgets/my_rounded_input_field.dart';
+import '../../core/models/user.dart';
+import '../../widgets/my_rounded_input_field.dart';
 import 'package:provider/provider.dart';
 
 import '../waiting.dart';

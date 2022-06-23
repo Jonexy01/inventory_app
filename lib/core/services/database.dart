@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:inventory_app/MyClasses/user_data_collection.dart';
+import 'package:inventory_app/core/models/user_data_collection.dart';
 
 enum SubUserResult {errorEncountered, notManagerEmail}
 
