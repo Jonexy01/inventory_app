@@ -8,15 +8,15 @@ import 'package:inventory_app/router/app_router.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: "AIzaSyAqQQhHRleReWCFv5rmx_oY8NKNdnNCM04",
-      authDomain: "inventory-app-720e2.firebaseapp.com",
-      projectId: "inventory-app-720e2",
-      storageBucket: "inventory-app-720e2.appspot.com",
-      messagingSenderId: "430439182152",
-      appId: "1:430439182152:web:10574c66f19a51d691cd7d",
-      measurementId: "G-TG49M3JXTH"
-    )
+    // options: const FirebaseOptions(
+    //   apiKey: "AIzaSyAqQQhHRleReWCFv5rmx_oY8NKNdnNCM04",
+    //   authDomain: "inventory-app-720e2.firebaseapp.com",
+    //   projectId: "inventory-app-720e2",
+    //   storageBucket: "inventory-app-720e2.appspot.com",
+    //   messagingSenderId: "430439182152",
+    //   appId: "1:430439182152:web:10574c66f19a51d691cd7d",
+    //   measurementId: "G-TG49M3JXTH"
+    // )
   );
   await Hive.initFlutter();
   await Hive.openBox(HiveKeys.appBox);

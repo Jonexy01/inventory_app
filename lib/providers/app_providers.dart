@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inventory_app/presentation/authentication/login/login_viewmodel.dart';
+import 'package:inventory_app/presentation/authentication/signup/signup_viewmodel.dart';
 
 //This file stores all providers that will be used throughout the app.
 //This includes all PROVIDERS and STATENOTIFIERPROVIDERS
@@ -23,3 +24,7 @@ final firebaseFirestoreProvider = Provider<FirebaseFirestore>(
 final loginViewModelProvider =
     StateNotifierProvider<LoginViewModel, LoginState>(
         (ref) => LoginViewModel(ref.read));
+
+final signupViewModelProvider =
+    StateNotifierProvider<SignupViewModel, SignupState>(
+        (ref) => SignupViewModel(ref.read));

@@ -2,9 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_app/presentation/authentication/login/login.dart';
 import 'package:inventory_app/presentation/authentication/signup/signup.dart';
+import 'package:inventory_app/presentation/authentication/verify_email.dart';
 import 'package:inventory_app/presentation/splash/landing_page.dart';
 import 'package:inventory_app/presentation/splash/splash_screen.dart';
 import 'package:inventory_app/presentation/home/homepage/home_page.dart';
+import 'package:inventory_app/presentation/splash/wrapper.dart';
 part 'app_router.gr.dart';
 
 @AdaptiveAutoRouter(            
@@ -15,6 +17,8 @@ part 'app_router.gr.dart';
     AutoRoute(page: HomePage),
     AutoRoute(page: LoginPage),
     AutoRoute(page: SignupPage),
+    AutoRoute(page: Wrapper),
+    AutoRoute(page: VerifyEmailPage),
   ],            
 )            
 class AppRouter extends _$AppRouter{}

@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 // import 'package:inventory_app/core/services/local_database/hive_keys.dart';
 // import 'package:inventory_app/core/services/local_database/local_database.dart';
-import 'package:inventory_app/providers/app_providers.dart';
+//import 'package:inventory_app/providers/app_providers.dart';
 import 'package:inventory_app/router/app_router.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
@@ -19,24 +19,28 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   @override
   void initState() {
     super.initState();
-    checkPreference(context);
-  }
-
-  Future<void> checkPreference(BuildContext context) async {
-    //final preferences = HiveStorage.get(HiveKeys.hasLoggedIn) ?? false;
-    final state = ref.watch(loginViewModelProvider);
-
-    if (state.user != null) {
-      await Future.delayed(const Duration(microseconds: 0), () {
-        context.router.replace(const HomePageRoute());
+    Future.delayed(const Duration(seconds: 5), () {
+        context.router.replace(const WrapperRoute());
       });
-    } else {
-      await Future.delayed(const Duration(seconds: 5), () {
-        context.router.replace(const LandingPageRoute());
-      });
-    }
+    //checkPreference(context);
     
   }
+
+  // Future<void> checkPreference(BuildContext context) async {
+  //   //final preferences = HiveStorage.get(HiveKeys.hasLoggedIn) ?? false;
+  //   final state = ref.watch(loginViewModelProvider);
+
+  //   if (state.user != null) {
+  //     await Future.delayed(const Duration(microseconds: 0), () {
+  //       context.router.replace(const HomePageRoute());
+  //     });
+  //   } else {
+  //     await Future.delayed(const Duration(seconds: 5), () {
+  //       context.router.replace(const LandingPageRoute());
+  //     });
+  //   }
+    
+  // }
 
   @override
   Widget build(BuildContext context) {

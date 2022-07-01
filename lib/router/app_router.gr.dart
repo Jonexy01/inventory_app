@@ -36,6 +36,14 @@ class _$AppRouter extends RootStackRouter {
     SignupPageRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
           routeData: routeData, child: const SignupPage());
+    },
+    WrapperRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const Wrapper());
+    },
+    VerifyEmailPageRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const VerifyEmailPage());
     }
   };
 
@@ -45,7 +53,9 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(LandingPageRoute.name, path: '/landing-page'),
         RouteConfig(HomePageRoute.name, path: '/home-page'),
         RouteConfig(LoginPageRoute.name, path: '/login-page'),
-        RouteConfig(SignupPageRoute.name, path: '/signup-page')
+        RouteConfig(SignupPageRoute.name, path: '/signup-page'),
+        RouteConfig(WrapperRoute.name, path: '/Wrapper'),
+        RouteConfig(VerifyEmailPageRoute.name, path: '/verify-email-page')
       ];
 }
 
@@ -88,4 +98,21 @@ class SignupPageRoute extends PageRouteInfo<void> {
   const SignupPageRoute() : super(SignupPageRoute.name, path: '/signup-page');
 
   static const String name = 'SignupPageRoute';
+}
+
+/// generated route for
+/// [Wrapper]
+class WrapperRoute extends PageRouteInfo<void> {
+  const WrapperRoute() : super(WrapperRoute.name, path: '/Wrapper');
+
+  static const String name = 'WrapperRoute';
+}
+
+/// generated route for
+/// [VerifyEmailPage]
+class VerifyEmailPageRoute extends PageRouteInfo<void> {
+  const VerifyEmailPageRoute()
+      : super(VerifyEmailPageRoute.name, path: '/verify-email-page');
+
+  static const String name = 'VerifyEmailPageRoute';
 }

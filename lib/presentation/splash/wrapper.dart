@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/core/models/user.dart';
-import 'package:inventory_app/presentation/Splash/landing_page.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inventory_app/presentation/authentication/verify_email.dart';
+import 'package:inventory_app/presentation/splash/landing_page.dart';
+import 'package:inventory_app/providers/app_providers.dart';
 
 import '../home/homepage/home_page.dart';
 
-class Wrapper extends StatelessWidget {
+class Wrapper extends ConsumerWidget {
   const Wrapper({ Key? key }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
 
-    final currentUser = Provider.of<MyUser?>(context);
+    final state = ref.watch(loginViewModelProvider);
 
-    //return either home or authenticate widget
-    if (currentUser == null) {
-      return LandingPage();
+    if (state.user == null) {
+      return const LandingPage();
     } else {
-      return HomePage();
+      return const VerifyEmailPage();
     }
+
+    
+    // final currentUser = Provider.of<MyUser?>(context);
+
+    // //return either home or authenticate widget
+    // if (currentUser == null) {
+    //   return LandingPage();
+    // } else {
+    //   return HomePage();
+    // }
     
   }
 }

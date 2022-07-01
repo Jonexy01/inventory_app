@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inventory_app/core/models/service_response_model.dart';
-import 'package:inventory_app/core/services/local_database/hive_keys.dart';
-import 'package:inventory_app/core/services/local_database/local_database.dart';
+// import 'package:inventory_app/core/services/local_database/hive_keys.dart';
+// import 'package:inventory_app/core/services/local_database/local_database.dart';
 import 'package:inventory_app/core/utils/enums.dart';
 import 'package:inventory_app/providers/app_providers.dart';
 import 'package:riverpod/riverpod.dart';
 
 class LoginViewModel extends StateNotifier<LoginState> {
   LoginViewModel(this._reader) : super(LoginState()){
-    _authStateChangesSubscription!.cancel();
+    //_authStateChangesSubscription!.cancel();
     _authStateChangesSubscription = authStateChanges.listen((event) { 
       state = state.copyWith(
         user: event,
