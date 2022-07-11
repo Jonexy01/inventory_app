@@ -4,15 +4,13 @@ import 'package:inventory_app/presentation/authentication/verify_email.dart';
 import 'package:inventory_app/presentation/splash/landing_page.dart';
 import 'package:inventory_app/providers/app_providers.dart';
 
-import '../home/homepage/home_page.dart';
-
 class Wrapper extends ConsumerWidget {
   const Wrapper({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final state = ref.watch(loginViewModelProvider);
+    final state = ref.watch(authViewModelProvider);
 
     if (state.user == null) {
       return const LandingPage();

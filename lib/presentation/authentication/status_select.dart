@@ -35,34 +35,34 @@ class _StatusSelectPageState extends State<StatusSelectPage> {
     final currentUser = Provider.of<MyUser?>(context);
     DatabaseService dbInstance = DatabaseService(uid: currentUser!.uid);
 
-    return waiting ? WaitingPage() : Scaffold(
+    return waiting ? const WaitingPage() : Scaffold(
       body: Container(
         child: Form(
           key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Please provide your details'),
-              Spacer(),
-              Spacer(),
+              const Text('Please provide your details'),
+              const Spacer(),
+              const Spacer(),
               DropdownButtonFormField(
                 items: [
                   DropdownMenuItem(
-                    child: Text('Select status'), 
+                    child: const Text('Select status'), 
                     value: '',
                     onTap: () {setState(() {
                       isStaffSelected = false;
                     });},
                   ),
                   DropdownMenuItem(
-                    child: Text('Manager'), 
+                    child: const Text('Manager'), 
                     value: 'Manager',
                     onTap: () {setState(() {
                       isStaffSelected = false;
                     });},
                   ),
                   DropdownMenuItem(
-                    child: Text('Staff'), 
+                    child: const Text('Staff'), 
                     value: 'Staff',
                     onTap: () {setState(() {
                       isStaffSelected = true;
@@ -70,7 +70,7 @@ class _StatusSelectPageState extends State<StatusSelectPage> {
                   ),
                 ], 
                 value: status,
-                hint: Text('Select your status'),
+                hint: const Text('Select your status'),
                 onChanged: (selectedValue) {
                   if (selectedValue is String) {
                     setState(() {
@@ -82,28 +82,28 @@ class _StatusSelectPageState extends State<StatusSelectPage> {
                 iconEnabledColor: Colors.amber,
                 isExpanded: true,
               ),
-              SizedBox(height: 10,),
-              MyRoundedInputField(
+              const SizedBox(height: 10,),
+              RoundedInputField(
                 onChanged: ((value) {
                   name = value;
                 }),
                 hintText: 'Enter your name',
                 icon: Icons.person,
               ),
-              SizedBox(height: 10,),
-              isStaffSelected ? MyRoundedInputField(
+              const SizedBox(height: 10,),
+              isStaffSelected ? RoundedInputField(
                 onChanged: (value) {
                   managerEmail = value;
                 },
                 hintText: 'Enter manager\'s email',
-              ) : MyRoundedInputField(
+              ) : RoundedInputField(
                 onChanged: ((value) {
                   businessName = value;
                 }),
                 hintText: 'Enter your business name',
               ),
-              Spacer(),
-              MyCircularTextButton(
+              const Spacer(),
+              RoundedTextButton(
                 text: 'Continue', 
                 press: () async {
                   if (_formKey.currentState!.validate()) {
@@ -144,9 +144,9 @@ class _StatusSelectPageState extends State<StatusSelectPage> {
               ),
               Text(
                 error,
-                style: TextStyle(color: Colors.red, fontSize: 14,),
+                style: const TextStyle(color: Colors.red, fontSize: 14,),
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
         )

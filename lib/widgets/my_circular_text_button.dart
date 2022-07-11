@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:inventory_app/core/utils/app_colors.dart';
 import 'package:inventory_app/widgets/app_spinkit.dart';
 
-class MyCircularTextButton extends StatelessWidget {
+class RoundedTextButton extends StatelessWidget {
 
   final String text;
   final VoidCallback press;
   final Color color, textColor;
   final bool isLoading;
   
-  const MyCircularTextButton({
+  const RoundedTextButton({
     Key? key,
     required this.text,
     required this.press,

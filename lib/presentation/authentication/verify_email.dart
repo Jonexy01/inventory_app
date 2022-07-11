@@ -19,7 +19,7 @@ class _VerifyEmailPageState extends ConsumerState<VerifyEmailPage> {
   void initState() {
     super.initState();
     isEmailVerified = ref.read(firebaseAuthProvider).currentUser!.emailVerified;
-    final userModel = ref.read(signupViewModelProvider.notifier);
+    final userModel = ref.read(authViewModelProvider.notifier);
     if (!isEmailVerified) {
       try {
         userModel.sendVerificationEmail();
@@ -60,7 +60,7 @@ class _VerifyEmailPageState extends ConsumerState<VerifyEmailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final userModel = ref.read(signupViewModelProvider.notifier);
+    final userModel = ref.read(authViewModelProvider.notifier);
 
     if (isEmailVerified) {
       return const HomePage();
@@ -71,18 +71,19 @@ class _VerifyEmailPageState extends ConsumerState<VerifyEmailPage> {
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
                 'A verification email has been sent to your email address'),
             const SizedBox(height: 10),
-            MyCircularTextButton(
+            RoundedTextButton(
               text: 'Resend email',
               press: () {
                 canResendEmail ? userModel.sendVerificationEmail() : () {};
               },
             ),
             const SizedBox(height: 10),
-            MyCircularTextButton(
+            RoundedTextButton(
               text: 'Cancel',
               press: () {
                 //Implement sign out

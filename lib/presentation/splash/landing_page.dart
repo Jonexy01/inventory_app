@@ -26,7 +26,7 @@ class LandingPage extends StatelessWidget {
             SizedBox(
               height: size.height * 0.3,
             ),
-            MyCircularTextButton(
+            RoundedTextButton(
               text: 'Login',
               press: () {
                 context.router.push(const LoginPageRoute());
@@ -34,7 +34,7 @@ class LandingPage extends StatelessWidget {
               },
               color: Colors.purple.shade400,
             ),
-            MyCircularTextButton(
+            RoundedTextButton(
               text: 'Sign up',
               press: () {
                 context.router.push(const SignupPageRoute());

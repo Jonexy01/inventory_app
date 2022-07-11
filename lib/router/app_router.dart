@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_app/presentation/authentication/forgot_password/forgot_password.dart';
 import 'package:inventory_app/presentation/authentication/login/login.dart';
 import 'package:inventory_app/presentation/authentication/signup/signup.dart';
 import 'package:inventory_app/presentation/authentication/verify_email.dart';
@@ -19,6 +20,7 @@ part 'app_router.gr.dart';
     AutoRoute(page: SignupPage),
     AutoRoute(page: Wrapper),
     AutoRoute(page: VerifyEmailPage),
+    AutoRoute(page: ForgotPasswordPage),
   ],            
 )            
 class AppRouter extends _$AppRouter{}

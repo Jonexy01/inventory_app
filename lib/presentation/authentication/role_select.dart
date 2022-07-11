@@ -13,24 +13,24 @@ class RoleSelectPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(),
-            Text('Please choose your role'),
-            Spacer(),
-            MyCircularTextButton(
+            const Spacer(),
+            const Text('Please choose your role'),
+            const Spacer(),
+            RoundedTextButton(
               color: Colors.purple.shade600,
               text: 'Create as admin', 
               press: () {
                 Navigator.pushReplacementNamed(context, AppRoute.home);
               }
             ),
-            MyCircularTextButton(
+            RoundedTextButton(
               color: Colors.purple.shade300,
               text: 'Join an existing business', 
               press: () {
                 
               }
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
           ],

@@ -44,6 +44,10 @@ class _$AppRouter extends RootStackRouter {
     VerifyEmailPageRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
           routeData: routeData, child: const VerifyEmailPage());
+    },
+    ForgotPasswordPageRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const ForgotPasswordPage());
     }
   };
 
@@ -55,7 +59,8 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(LoginPageRoute.name, path: '/login-page'),
         RouteConfig(SignupPageRoute.name, path: '/signup-page'),
         RouteConfig(WrapperRoute.name, path: '/Wrapper'),
-        RouteConfig(VerifyEmailPageRoute.name, path: '/verify-email-page')
+        RouteConfig(VerifyEmailPageRoute.name, path: '/verify-email-page'),
+        RouteConfig(ForgotPasswordPageRoute.name, path: '/forgot-password-page')
       ];
 }
 
@@ -115,4 +120,13 @@ class VerifyEmailPageRoute extends PageRouteInfo<void> {
       : super(VerifyEmailPageRoute.name, path: '/verify-email-page');
 
   static const String name = 'VerifyEmailPageRoute';
+}
+
+/// generated route for
+/// [ForgotPasswordPage]
+class ForgotPasswordPageRoute extends PageRouteInfo<void> {
+  const ForgotPasswordPageRoute()
+      : super(ForgotPasswordPageRoute.name, path: '/forgot-password-page');
+
+  static const String name = 'ForgotPasswordPageRoute';
 }
