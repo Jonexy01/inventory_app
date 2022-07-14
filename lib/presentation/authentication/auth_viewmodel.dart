@@ -2,16 +2,15 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:inventory_app/core/models/service_response_model.dart';
-// import 'package:inventory_app/core/services/local_database/hive_keys.dart';
-// import 'package:inventory_app/core/services/local_database/local_database.dart';
+import 'package:inventory_app/core/models/user_record/user_record_model.dart';
 import 'package:inventory_app/core/utils/enums.dart';
 import 'package:inventory_app/providers/app_providers.dart';
 import 'package:riverpod/riverpod.dart';
 
 class AuthViewModel extends StateNotifier<AuthState> {
-  AuthViewModel(this._reader) : super(AuthState()){
+  AuthViewModel(this._reader) : super(AuthState()) {
     //_authStateChangesSubscription!.cancel();
-    _authStateChangesSubscription = authStateChanges.listen((event) { 
+    _authStateChangesSubscription = authStateChanges.listen((event) {
       state = state.copyWith(
         user: event,
       );
@@ -28,8 +27,8 @@ class AuthViewModel extends StateNotifier<AuthState> {
 
   final Reader _reader;
 
-  Stream<User?> get authStateChanges => 
-  _reader(firebaseAuthProvider).authStateChanges();
+  Stream<User?> get authStateChanges =>
+      _reader(firebaseAuthProvider).authStateChanges();
 
   Future<ServiceResponse> signinWithEmailAndPassword(
       String email, String password) async {
@@ -37,32 +36,28 @@ class AuthViewModel extends StateNotifier<AuthState> {
     try {
       UserCredential userInfo = await _reader(firebaseAuthProvider)
           .signInWithEmailAndPassword(email: email, password: password);
+      final _userRecord = UserRecord(id: userInfo.user!.uid);
+      await _reader(userDataCrudProvider).retrieveUserRecord(uid: userInfo.user!.uid);
       //await HiveStorage.put(HiveKeys.hasLoggedIn, true);
-      state = state.copyWith(user: userInfo.user, loadStatus: Loader.loaded);
+      state = state.copyWith(user: userInfo.user, loadStatus: Loader.loaded, userRecord: _userRecord);
       return ServiceResponse(successMessage: 'Login successful');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        state = state.copyWith(
-          loadStatus: Loader.error
-        );
-        return ServiceResponse(errorMessage: 'Email provided not registered yet');
+        state = state.copyWith(loadStatus: Loader.error);
+        return ServiceResponse(
+            errorMessage: 'Email provided not registered yet');
       } else if (e.code == 'wrong-password') {
-        state = state.copyWith(
-          loadStatus: Loader.error
-        );
-        return ServiceResponse(
-            errorMessage: 'Password provided is wrong');
+        state = state.copyWith(loadStatus: Loader.error);
+        return ServiceResponse(errorMessage: 'Password provided is wrong');
       } else {
-        state = state.copyWith(
-          loadStatus: Loader.error
-        );
-        return ServiceResponse(
-            errorMessage: 'An unexpected error occured');
+        state = state.copyWith(loadStatus: Loader.error);
+        return ServiceResponse(errorMessage: 'An unexpected error occured');
       }
+    } on FirebaseException catch (e) {
+      state = state.copyWith(loadStatus: Loader.error);
+      return ServiceResponse(errorMessage: e.code);
     } catch (e) {
-      state = state.copyWith(
-        loadStatus: Loader.error
-      );
+      state = state.copyWith(loadStatus: Loader.error);
       rethrow;
     }
   }
@@ -111,8 +106,10 @@ class AuthViewModel extends StateNotifier<AuthState> {
     try {
       UserCredential userInfo = await _reader(firebaseAuthProvider)
           .createUserWithEmailAndPassword(email: email, password: password);
-      state =
-          state.copyWith(user: userInfo.user, loadStatus: Loader.loaded);
+      final _userRecord = UserRecord(id: userInfo.user!.uid);
+      await _reader(userDataCrudProvider).createUserRecord(userRecord: _userRecord);
+      //HiveStorage.put(HiveKeys.isRoleSelected, false);
+      state = state.copyWith(user: userInfo.user, loadStatus: Loader.loaded, userRecord: _userRecord);
       //await userInfo.user!.sendEmailVerification();
       return ServiceResponse(successMessage: 'Sign up successful');
     } on FirebaseAuthException catch (e) {
@@ -124,6 +121,9 @@ class AuthViewModel extends StateNotifier<AuthState> {
       } else {
         return ServiceResponse(error: e);
       }
+    } on FirebaseException catch (e) {
+      state = state.copyWith(loadStatus: Loader.error);
+      return ServiceResponse(errorMessage: e.code);
     } catch (e) {
       state = state.copyWith(loadStatus: Loader.error);
       rethrow;
@@ -137,9 +137,23 @@ class AuthViewModel extends StateNotifier<AuthState> {
       state = state.copyWith(loadStatus: Loader.loaded);
       return ServiceResponse(successMessage: 'Signout successful');
     } catch (e) {
-      state = state.copyWith(
-        loadStatus: Loader.error
-      );
+      state = state.copyWith(loadStatus: Loader.error);
+      rethrow;
+    }
+  }
+
+  Future<ServiceResponse> fetchUserRecord() async {
+    state = state.copyWith(loadStatus: Loader.loading);
+    try {
+      final _userRecord = await _reader(userDataCrudProvider)
+          .retrieveUserRecord(uid: state.user!.uid);
+      state = state.copyWith(userRecord: _userRecord, loadStatus: Loader.loaded);
+      return ServiceResponse(successMessage: 'User record fetched successfuly');
+    } on FirebaseException catch (e) {
+      state = state.copyWith(loadStatus: Loader.error);
+      return ServiceResponse(errorMessage: e.code);
+    } catch (e) {
+      state = state.copyWith(loadStatus: Loader.error);
       rethrow;
     }
   }
@@ -148,13 +162,15 @@ class AuthViewModel extends StateNotifier<AuthState> {
 class AuthState {
   Loader loadStatus;
   User? user;
+  UserRecord? userRecord;
 
-  AuthState({this.loadStatus = Loader.idle, this.user});
+  AuthState({this.loadStatus = Loader.idle, this.user, this.userRecord,});
 
-  AuthState copyWith({Loader? loadStatus, User? user}) {
+  AuthState copyWith({Loader? loadStatus, User? user, UserRecord? userRecord,}) {
     return AuthState(
       loadStatus: loadStatus ?? this.loadStatus,
       user: user ?? this.user,
+      userRecord: userRecord ?? this.userRecord,
     );
   }
 }

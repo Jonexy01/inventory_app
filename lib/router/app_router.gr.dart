@@ -48,6 +48,18 @@ class _$AppRouter extends RootStackRouter {
     ForgotPasswordPageRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
           routeData: routeData, child: const ForgotPasswordPage());
+    },
+    StopoverPageRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const StopoverPage());
+    },
+    RoleSelectPageRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const RoleSelectPage());
+    },
+    StopoverAddUserPageRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const StopoverAddUserPage());
     }
   };
 
@@ -60,7 +72,12 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(SignupPageRoute.name, path: '/signup-page'),
         RouteConfig(WrapperRoute.name, path: '/Wrapper'),
         RouteConfig(VerifyEmailPageRoute.name, path: '/verify-email-page'),
-        RouteConfig(ForgotPasswordPageRoute.name, path: '/forgot-password-page')
+        RouteConfig(ForgotPasswordPageRoute.name,
+            path: '/forgot-password-page'),
+        RouteConfig(StopoverPageRoute.name, path: '/stopover-page'),
+        RouteConfig(RoleSelectPageRoute.name, path: '/role-select-page'),
+        RouteConfig(StopoverAddUserPageRoute.name,
+            path: '/stopover-add-user-page')
       ];
 }
 
@@ -129,4 +146,31 @@ class ForgotPasswordPageRoute extends PageRouteInfo<void> {
       : super(ForgotPasswordPageRoute.name, path: '/forgot-password-page');
 
   static const String name = 'ForgotPasswordPageRoute';
+}
+
+/// generated route for
+/// [StopoverPage]
+class StopoverPageRoute extends PageRouteInfo<void> {
+  const StopoverPageRoute()
+      : super(StopoverPageRoute.name, path: '/stopover-page');
+
+  static const String name = 'StopoverPageRoute';
+}
+
+/// generated route for
+/// [RoleSelectPage]
+class RoleSelectPageRoute extends PageRouteInfo<void> {
+  const RoleSelectPageRoute()
+      : super(RoleSelectPageRoute.name, path: '/role-select-page');
+
+  static const String name = 'RoleSelectPageRoute';
+}
+
+/// generated route for
+/// [StopoverAddUserPage]
+class StopoverAddUserPageRoute extends PageRouteInfo<void> {
+  const StopoverAddUserPageRoute()
+      : super(StopoverAddUserPageRoute.name, path: '/stopover-add-user-page');
+
+  static const String name = 'StopoverAddUserPageRoute';
 }

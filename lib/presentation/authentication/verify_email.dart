@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inventory_app/core/services/service_utils.dart';
-import 'package:inventory_app/presentation/home/homepage/home_page.dart';
+import 'package:inventory_app/presentation/authentication/role_select.dart';
 import 'package:inventory_app/providers/app_providers.dart';
 import 'package:inventory_app/widgets/my_circular_text_button.dart';
 
@@ -63,7 +63,7 @@ class _VerifyEmailPageState extends ConsumerState<VerifyEmailPage> {
     final userModel = ref.read(authViewModelProvider.notifier);
 
     if (isEmailVerified) {
-      return const HomePage();
+      return const RoleSelectPage();
     } else {
       return Scaffold(
         appBar: AppBar(
