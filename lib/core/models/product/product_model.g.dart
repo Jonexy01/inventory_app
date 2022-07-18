@@ -8,7 +8,7 @@ part of 'product_model.dart';
 
 _$_Product _$$_ProductFromJson(Map<String, dynamic> json) => _$_Product(
       id: json['id'] as String?,
-      name: json['name'] as String,
+      name: json['name'] as String?,
       quantity: json['quantity'] as int?,
       obtained: json['obtained'] as bool? ?? false,
     );

@@ -21,7 +21,7 @@ UserRecord _$UserRecordFromJson(Map<String, dynamic> json) {
 class _$UserRecordTearOff {
   const _$UserRecordTearOff();
 
-  _UserRecord call({required String id, String? businessName, String? role}) {
+  _UserRecord call({String? id, String? businessName, String? role}) {
     return _UserRecord(
       id: id,
       businessName: businessName,
@@ -39,7 +39,7 @@ const $UserRecord = _$UserRecordTearOff();
 
 /// @nodoc
 mixin _$UserRecord {
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String? get businessName => throw _privateConstructorUsedError;
   String? get role => throw _privateConstructorUsedError;
 
@@ -54,7 +54,7 @@ abstract class $UserRecordCopyWith<$Res> {
   factory $UserRecordCopyWith(
           UserRecord value, $Res Function(UserRecord) then) =
       _$UserRecordCopyWithImpl<$Res>;
-  $Res call({String id, String? businessName, String? role});
+  $Res call({String? id, String? businessName, String? role});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$UserRecordCopyWithImpl<$Res> implements $UserRecordCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       businessName: businessName == freezed
           ? _value.businessName
           : businessName // ignore: cast_nullable_to_non_nullable
@@ -94,7 +94,7 @@ abstract class _$UserRecordCopyWith<$Res> implements $UserRecordCopyWith<$Res> {
           _UserRecord value, $Res Function(_UserRecord) then) =
       __$UserRecordCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String? businessName, String? role});
+  $Res call({String? id, String? businessName, String? role});
 }
 
 /// @nodoc
@@ -117,7 +117,7 @@ class __$UserRecordCopyWithImpl<$Res> extends _$UserRecordCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       businessName: businessName == freezed
           ? _value.businessName
           : businessName // ignore: cast_nullable_to_non_nullable
@@ -133,13 +133,13 @@ class __$UserRecordCopyWithImpl<$Res> extends _$UserRecordCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
-  _$_UserRecord({required this.id, this.businessName, this.role}) : super._();
+  _$_UserRecord({this.id, this.businessName, this.role}) : super._();
 
   factory _$_UserRecord.fromJson(Map<String, dynamic> json) =>
       _$$_UserRecordFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
   final String? businessName;
   @override
@@ -190,15 +190,15 @@ class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
 }
 
 abstract class _UserRecord extends UserRecord {
-  factory _UserRecord(
-      {required String id, String? businessName, String? role}) = _$_UserRecord;
+  factory _UserRecord({String? id, String? businessName, String? role}) =
+      _$_UserRecord;
   _UserRecord._() : super._();
 
   factory _UserRecord.fromJson(Map<String, dynamic> json) =
       _$_UserRecord.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
   String? get businessName;
   @override

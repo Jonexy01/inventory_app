@@ -34,13 +34,11 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
     final state = ref.watch(authViewModelProvider);
 
     return Scaffold(
-      body: Container(
-        width: double.infinity,
+      body: Center(
         child: Form(
           key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Spacer(),
               const Text(

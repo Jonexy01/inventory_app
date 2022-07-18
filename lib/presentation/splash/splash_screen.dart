@@ -2,28 +2,34 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inventory_app/providers/app_providers.dart';
 // import 'package:inventory_app/core/services/local_database/hive_keys.dart';
 // import 'package:inventory_app/core/services/local_database/local_database.dart';
 //import 'package:inventory_app/providers/app_providers.dart';
 import 'package:inventory_app/router/app_router.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
-  const SplashPage({ Key? key }) : super(key: key);
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
   _SplashPageState createState() => _SplashPageState();
 }
 
 class _SplashPageState extends ConsumerState<SplashPage> {
-
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5), () {
+    if (ref.read(firebaseAuthProvider).currentUser != null) {
+      ref.read(authViewModelProvider.notifier).fetchUserRecord().then((value) {
+        Future.delayed(const Duration(seconds: 5), () {
+          context.router.replace(const WrapperRoute());
+        });
+      });
+    } else {
+      Future.delayed(const Duration(seconds: 5), () {
         context.router.replace(const WrapperRoute());
       });
-    //checkPreference(context);
-    
+    }
   }
 
   // Future<void> checkPreference(BuildContext context) async {
@@ -39,7 +45,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   //       context.router.replace(const LandingPageRoute());
   //     });
   //   }
-    
+
   // }
 
   @override
@@ -47,23 +53,25 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     return Scaffold(
       backgroundColor: Colors.purple[400],
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            SpinKitFoldingCube(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          SpinKitFoldingCube(
+            color: Colors.white,
+            size: 100.0,
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Text(
+            "The Inventory App",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
               color: Colors.white,
-              size: 100.0,
             ),
-            SizedBox(
-              height: 30,
-            ),
-            Text(
-              "The Inventory App",
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white,),
-              ),
-          ],
-        )
-        ),
+          ),
+        ],
+      )),
     );
   }
 }

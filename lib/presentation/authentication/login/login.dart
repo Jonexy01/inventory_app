@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inventory_app/core/services/service_utils.dart';
 import 'package:inventory_app/core/utils/app_colors.dart';
+import 'package:inventory_app/core/utils/constants.dart';
 import 'package:inventory_app/core/utils/enums.dart';
 import 'package:inventory_app/core/utils/validator.dart';
 import 'package:inventory_app/providers/app_providers.dart';
@@ -46,15 +48,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    //Size size = MediaQuery.of(context).size;
     final state = ref.watch(authViewModelProvider);
     final model = ref.read(authViewModelProvider.notifier);
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          height: size.height,
-          width: double.infinity,
+          height: height(context),
+          alignment: Alignment.center,
           child: Form(
             key: _formKey,
             child: Column(
@@ -125,16 +127,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           _passwordController.text,
                         );
                         if (myResult.successMessage.isNotEmpty) {
-                          AlertFlushbar.showNotification(
+                          SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+                            AlertFlushbar.showNotification(
                             message: myResult.successMessage,
                             context: context,
                           );
+                          });
+                          
                           context.router
                               .replaceAll([const VerifyEmailPageRoute()]);
                         } else {
-                          handleError(
+                          SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+                            handleError(
                               e: myResult.error ?? myResult.errorMessage,
                               context: context);
+                          }); 
                         }
                       } else {
                         showConnectionError(context: context);

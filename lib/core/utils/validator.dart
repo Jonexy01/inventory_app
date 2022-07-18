@@ -27,3 +27,24 @@ class EmailValidator {
     }
   }
 }
+
+class FieldValidator {
+  static String? validateField(String value) {
+    if (value.isEmpty) {
+      return emptyTextField;
+    }
+    if (value.length < 40) {
+      return null;
+    } else {
+      return "Entry too long";
+    }
+  }
+
+  static String? validateEmptyfield(String value) {
+    if (value.isEmpty) {
+      return emptyTextField;
+    }
+
+    return null;
+  }
+}

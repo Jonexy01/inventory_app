@@ -4,15 +4,21 @@ import 'package:inventory_app/presentation/authentication/verify_email.dart';
 import 'package:inventory_app/presentation/splash/landing_page.dart';
 import 'package:inventory_app/providers/app_providers.dart';
 
-class Wrapper extends ConsumerWidget {
+class Wrapper extends ConsumerStatefulWidget {
   const Wrapper({ Key? key }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<Wrapper> createState() => _WrapperState();
+}
 
-    final state = ref.watch(authViewModelProvider);
+class _WrapperState extends ConsumerState<Wrapper> {
+  @override
+  Widget build(BuildContext context) {
 
-    if (state.user == null) {
+    //final state = ref.watch(authViewModelProvider);
+
+    if (ref.read(firebaseAuthProvider).currentUser == null) {
+      //state.user == null) {
       return const LandingPage();
     } else {
       return const VerifyEmailPage();

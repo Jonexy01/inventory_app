@@ -22,10 +22,7 @@ class _$ProductTearOff {
   const _$ProductTearOff();
 
   _Product call(
-      {String? id,
-      required String name,
-      int? quantity,
-      bool obtained = false}) {
+      {String? id, String? name, int? quantity, bool obtained = false}) {
     return _Product(
       id: id,
       name: name,
@@ -45,7 +42,7 @@ const $Product = _$ProductTearOff();
 /// @nodoc
 mixin _$Product {
   String? get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   int? get quantity => throw _privateConstructorUsedError;
   bool get obtained => throw _privateConstructorUsedError;
 
@@ -58,7 +55,7 @@ mixin _$Product {
 abstract class $ProductCopyWith<$Res> {
   factory $ProductCopyWith(Product value, $Res Function(Product) then) =
       _$ProductCopyWithImpl<$Res>;
-  $Res call({String? id, String name, int? quantity, bool obtained});
+  $Res call({String? id, String? name, int? quantity, bool obtained});
 }
 
 /// @nodoc
@@ -84,7 +81,7 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -102,7 +99,7 @@ abstract class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
   factory _$ProductCopyWith(_Product value, $Res Function(_Product) then) =
       __$ProductCopyWithImpl<$Res>;
   @override
-  $Res call({String? id, String name, int? quantity, bool obtained});
+  $Res call({String? id, String? name, int? quantity, bool obtained});
 }
 
 /// @nodoc
@@ -129,7 +126,7 @@ class __$ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -145,8 +142,7 @@ class __$ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Product extends _Product with DiagnosticableTreeMixin {
-  const _$_Product(
-      {this.id, required this.name, this.quantity, this.obtained = false})
+  const _$_Product({this.id, this.name, this.quantity, this.obtained = false})
       : super._();
 
   factory _$_Product.fromJson(Map<String, dynamic> json) =>
@@ -155,7 +151,7 @@ class _$_Product extends _Product with DiagnosticableTreeMixin {
   @override
   final String? id;
   @override
-  final String name;
+  final String? name;
   @override
   final int? quantity;
   @JsonKey()
@@ -210,10 +206,7 @@ class _$_Product extends _Product with DiagnosticableTreeMixin {
 
 abstract class _Product extends Product {
   const factory _Product(
-      {String? id,
-      required String name,
-      int? quantity,
-      bool obtained}) = _$_Product;
+      {String? id, String? name, int? quantity, bool obtained}) = _$_Product;
   const _Product._() : super._();
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$_Product.fromJson;
@@ -221,7 +214,7 @@ abstract class _Product extends Product {
   @override
   String? get id;
   @override
-  String get name;
+  String? get name;
   @override
   int? get quantity;
   @override

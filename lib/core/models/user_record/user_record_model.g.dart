@@ -8,7 +8,7 @@ part of 'user_record_model.dart';
 
 _$_UserRecord _$$_UserRecordFromJson(Map<String, dynamic> json) =>
     _$_UserRecord(
-      id: json['id'] as String,
+      id: json['id'] as String?,
       businessName: json['businessName'] as String?,
       role: json['role'] as String?,
     );

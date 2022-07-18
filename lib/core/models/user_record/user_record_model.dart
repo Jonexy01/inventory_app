@@ -9,7 +9,7 @@ part 'user_record_model.g.dart';
 abstract class UserRecord implements _$UserRecord {
   const UserRecord._();
 
-  factory UserRecord({required String id, String? businessName, String? role}) = _UserRecord;
+  factory UserRecord({String? id, String? businessName, String? role}) = _UserRecord;
 
   factory UserRecord.fromJson(Map<String, dynamic> json) =>
       _$UserRecordFromJson(json);
