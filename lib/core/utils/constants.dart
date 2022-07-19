@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/core/models/menu_item_model.dart';
+import 'package:inventory_app/router/app_router.dart';
 
 const String emptyPasswordField = 'Password field cannot be empty';
 const String passwordLengthError = 'Password length must be greater than 8';
@@ -29,3 +31,21 @@ double width(BuildContext context) {
 double height(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
+
+List<MenuItem> menuList = [
+  MenuItem(
+    leading: const Icon(Icons.home_outlined),
+    titleText: 'Home',
+    route: const HomePageRoute(),
+  ),
+  MenuItem(
+    leading: const Icon(Icons.notifications_outlined),
+    titleText: 'Notifications',
+  ),
+  MenuItem(
+    leading: const Icon(Icons.logout_outlined),
+    titleText: 'Logout',
+    onTap: () {},
+    route: const LandingPageRoute(),
+  ),
+];

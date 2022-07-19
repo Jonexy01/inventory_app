@@ -36,120 +36,118 @@ class _StatusSelectPageState extends State<StatusSelectPage> {
     DatabaseService dbInstance = DatabaseService(uid: currentUser!.uid);
 
     return waiting ? const WaitingPage() : Scaffold(
-      body: Container(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Please provide your details'),
-              const Spacer(),
-              const Spacer(),
-              DropdownButtonFormField(
-                items: [
-                  DropdownMenuItem(
-                    child: const Text('Select status'), 
-                    value: '',
-                    onTap: () {setState(() {
-                      isStaffSelected = false;
-                    });},
-                  ),
-                  DropdownMenuItem(
-                    child: const Text('Manager'), 
-                    value: 'Manager',
-                    onTap: () {setState(() {
-                      isStaffSelected = false;
-                    });},
-                  ),
-                  DropdownMenuItem(
-                    child: const Text('Staff'), 
-                    value: 'Staff',
-                    onTap: () {setState(() {
-                      isStaffSelected = true;
-                    });},
-                  ),
-                ], 
-                value: status,
-                hint: const Text('Select your status'),
-                onChanged: (selectedValue) {
-                  if (selectedValue is String) {
-                    setState(() {
-                      status = selectedValue;
-                    });
-                  }
-                },
-                iconSize: 20,
-                iconEnabledColor: Colors.amber,
-                isExpanded: true,
-              ),
-              const SizedBox(height: 10,),
-              RoundedInputField(
-                onChanged: ((value) {
-                  name = value;
-                }),
-                hintText: 'Enter your name',
-                icon: Icons.person,
-              ),
-              const SizedBox(height: 10,),
-              isStaffSelected ? RoundedInputField(
-                onChanged: (value) {
-                  managerEmail = value;
-                },
-                hintText: 'Enter manager\'s email',
-              ) : RoundedInputField(
-                onChanged: ((value) {
-                  businessName = value;
-                }),
-                hintText: 'Enter your business name',
-              ),
-              const Spacer(),
-              RoundedTextButton(
-                text: 'Continue', 
-                press: () async {
-                  if (_formKey.currentState!.validate()) {
-                    setState(() {
-                      waiting = true;
-                    });
-                    if(status == 'Manager') {
-                      await dbInstance.updateUserDataNameRole(
-                        name: name, status: status, businessName: businessName
-                      );
-                      Navigator.pushReplacementNamed(context, AppRoute.home);
-                    } else if(status == 'Staff') {
-                      await dbInstance.updateUserDataNameRole(name: name, status: status);
-                      dynamic linkManager = await dbInstance.createSubuserUnderUser(name, managerEmail, status);
-                      if (linkManager == SubUserResult.errorEncountered) {
-                        setState(() {
-                          error = 'Something went wrong. Ensure Manager;s email is correct';
-                          waiting = false;
-                        });
-                      } else if (linkManager == SubUserResult.notManagerEmail) {
-                        setState(() {
-                          error = 'Something went wrong. Provided email may not belong to a Manager';
-                          waiting = false;
-                        });
-                      } else {
-                        Navigator.pushReplacementNamed(context, AppRoute.home);
-                      }
-                    } else{
+      body: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('Please provide your details'),
+            const Spacer(),
+            const Spacer(),
+            DropdownButtonFormField(
+              items: [
+                DropdownMenuItem(
+                  child: const Text('Select status'), 
+                  value: '',
+                  onTap: () {setState(() {
+                    isStaffSelected = false;
+                  });},
+                ),
+                DropdownMenuItem(
+                  child: const Text('Manager'), 
+                  value: 'Manager',
+                  onTap: () {setState(() {
+                    isStaffSelected = false;
+                  });},
+                ),
+                DropdownMenuItem(
+                  child: const Text('Staff'), 
+                  value: 'Staff',
+                  onTap: () {setState(() {
+                    isStaffSelected = true;
+                  });},
+                ),
+              ], 
+              value: status,
+              hint: const Text('Select your status'),
+              onChanged: (selectedValue) {
+                if (selectedValue is String) {
+                  setState(() {
+                    status = selectedValue;
+                  });
+                }
+              },
+              iconSize: 20,
+              iconEnabledColor: Colors.amber,
+              isExpanded: true,
+            ),
+            const SizedBox(height: 10,),
+            RoundedInputField(
+              onChanged: ((value) {
+                name = value;
+              }),
+              hintText: 'Enter your name',
+              icon: Icons.person,
+            ),
+            const SizedBox(height: 10,),
+            isStaffSelected ? RoundedInputField(
+              onChanged: (value) {
+                managerEmail = value;
+              },
+              hintText: 'Enter manager\'s email',
+            ) : RoundedInputField(
+              onChanged: ((value) {
+                businessName = value;
+              }),
+              hintText: 'Enter your business name',
+            ),
+            const Spacer(),
+            RoundedTextButton(
+              text: 'Continue', 
+              press: () async {
+                if (_formKey.currentState!.validate()) {
+                  setState(() {
+                    waiting = true;
+                  });
+                  if(status == 'Manager') {
+                    await dbInstance.updateUserDataNameRole(
+                      name: name, status: status, businessName: businessName
+                    );
+                    Navigator.pushReplacementNamed(context, AppRoute.home);
+                  } else if(status == 'Staff') {
+                    await dbInstance.updateUserDataNameRole(name: name, status: status);
+                    dynamic linkManager = await dbInstance.createSubuserUnderUser(name, managerEmail, status);
+                    if (linkManager == SubUserResult.errorEncountered) {
                       setState(() {
-                        error = 'Something went wrong';
+                        error = 'Something went wrong. Ensure Manager;s email is correct';
                         waiting = false;
                       });
-                      
+                    } else if (linkManager == SubUserResult.notManagerEmail) {
+                      setState(() {
+                        error = 'Something went wrong. Provided email may not belong to a Manager';
+                        waiting = false;
+                      });
+                    } else {
+                      Navigator.pushReplacementNamed(context, AppRoute.home);
                     }
+                  } else{
+                    setState(() {
+                      error = 'Something went wrong';
+                      waiting = false;
+                    });
+                    
                   }
-                  
-                },
-              ),
-              Text(
-                error,
-                style: const TextStyle(color: Colors.red, fontSize: 14,),
-              ),
-              const Spacer(),
-            ],
-          ),
-        )
+                }
+                
+              },
+            ),
+            Text(
+              error,
+              style: const TextStyle(color: Colors.red, fontSize: 14,),
+            ),
+            const Spacer(),
+          ],
+        ),
       ),
     );
   }

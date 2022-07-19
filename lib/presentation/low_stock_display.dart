@@ -11,8 +11,8 @@ class _LowStockDisplayState extends State<LowStockDisplay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Low Stock'), centerTitle: true,),
-      body: Center(child: Text("This displays low stock")),
+      appBar: AppBar(title: const Text('Low Stock'), centerTitle: true,),
+      body: const Center(child: Text("This displays low stock")),
     );
   }
 }

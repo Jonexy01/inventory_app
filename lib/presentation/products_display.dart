@@ -11,8 +11,8 @@ class _ProductDisplayState extends State<ProductDisplay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Products'), centerTitle: true,),
-      body: Center(child: Text("This displays product")),
+      appBar: AppBar(title: const Text('Products'), centerTitle: true,),
+      body: const Center(child: Text("This displays product")),
     );
   }
 }

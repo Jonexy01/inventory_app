@@ -38,9 +38,8 @@ class AuthViewModel extends StateNotifier<AuthState> {
     try {
       UserCredential userInfo = await _reader(firebaseAuthProvider)
           .signInWithEmailAndPassword(email: email, password: password);
-      final _userRecord = UserRecord(id: userInfo.user!.uid);
-      await _reader(userDataCrudProvider)
-          .retrieveUserRecord(uid: _userRecord.id!);
+      final _userRecord = await _reader(userDataCrudProvider)
+          .retrieveUserRecord(uid: userInfo.user!.uid);
       //await HiveStorage.put(HiveKeys.hasLoggedIn, true);
       state = state.copyWith(
           user: userInfo.user,
@@ -57,7 +56,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
         return ServiceResponse(errorMessage: 'Password provided is wrong');
       } else {
         state = state.copyWith(loadStatus: Loader.error);
-        return ServiceResponse(errorMessage: 'An unexpected error occured');
+        return ServiceResponse(errorMessage: e.code);
       }
     } on FirebaseException catch (e) {
       state = state.copyWith(loadStatus: Loader.error);
@@ -219,8 +218,11 @@ class AuthViewModel extends StateNotifier<AuthState> {
         final userInfo = _reader(firebaseAuthProvider).currentUser;
         final _userRecord = await _reader(userDataCrudProvider)
             .retrieveUserRecord(uid: userInfo!.uid);
-        state =
-            state.copyWith(userRecord: _userRecord, loadStatus: Loader.loaded, user: userInfo,);
+        state = state.copyWith(
+          userRecord: _userRecord,
+          loadStatus: Loader.loaded,
+          user: userInfo,
+        );
         return ServiceResponse(
             successMessage: 'User record fetched successfuly');
       } else {
@@ -235,15 +237,14 @@ class AuthViewModel extends StateNotifier<AuthState> {
     }
   }
 
-  Future<ServiceResponse> updateUserProfile({
-    required String role,
-    required String userId,
-    required String businessName,
-    String? name
-  }) async {
+  Future<ServiceResponse> updateUserProfile(
+      {required String role,
+      required String userId,
+      required String businessName,
+      String? name}) async {
     state = state.copyWith(loadStatus: Loader.loading);
     UserRecord userRecord =
-        UserRecord(id: userId, role: role, businessName: businessName);
+        UserRecord(id: userId, role: role, businessName: businessName, name: name,);
     try {
       final cResult = await Connectivity().checkConnectivity();
       if (cResult != ConnectivityResult.none) {

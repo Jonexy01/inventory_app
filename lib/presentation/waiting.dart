@@ -8,7 +8,7 @@ class WaitingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.purple.shade50,
-      child: Center(
+      child: const Center(
         child: SpinKitChasingDots(
           color: Colors.amber,
           size: 50,

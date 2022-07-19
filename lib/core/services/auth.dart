@@ -37,7 +37,7 @@ class AuthService {
       User? user = userInfo.user;
       return converUsertoMyuser(user);
     } catch(e) {
-      print(e.toString());
+      //print(e.toString());
       return null;
     }
   }
@@ -52,7 +52,7 @@ class AuthService {
       await DatabaseService(uid: user!.uid).updateUserData('name', email,);
       return converUsertoMyuser(user);
     } catch(e) {
-      print(e.toString());
+      //print(e.toString());
       return null;
     }
   }
@@ -63,7 +63,7 @@ class AuthService {
       await _auth.signOut();
       return Navigator.pushReplacementNamed(context, route);
     } catch(e) {
-      print(e.toString());
+      //print(e.toString());
       return null;
     }
   }

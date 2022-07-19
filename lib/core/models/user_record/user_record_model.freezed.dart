@@ -21,11 +21,13 @@ UserRecord _$UserRecordFromJson(Map<String, dynamic> json) {
 class _$UserRecordTearOff {
   const _$UserRecordTearOff();
 
-  _UserRecord call({String? id, String? businessName, String? role}) {
+  _UserRecord call(
+      {String? id, String? businessName, String? role, String? name}) {
     return _UserRecord(
       id: id,
       businessName: businessName,
       role: role,
+      name: name,
     );
   }
 
@@ -42,6 +44,7 @@ mixin _$UserRecord {
   String? get id => throw _privateConstructorUsedError;
   String? get businessName => throw _privateConstructorUsedError;
   String? get role => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +57,7 @@ abstract class $UserRecordCopyWith<$Res> {
   factory $UserRecordCopyWith(
           UserRecord value, $Res Function(UserRecord) then) =
       _$UserRecordCopyWithImpl<$Res>;
-  $Res call({String? id, String? businessName, String? role});
+  $Res call({String? id, String? businessName, String? role, String? name});
 }
 
 /// @nodoc
@@ -70,6 +73,7 @@ class _$UserRecordCopyWithImpl<$Res> implements $UserRecordCopyWith<$Res> {
     Object? id = freezed,
     Object? businessName = freezed,
     Object? role = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -84,6 +88,10 @@ class _$UserRecordCopyWithImpl<$Res> implements $UserRecordCopyWith<$Res> {
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -94,7 +102,7 @@ abstract class _$UserRecordCopyWith<$Res> implements $UserRecordCopyWith<$Res> {
           _UserRecord value, $Res Function(_UserRecord) then) =
       __$UserRecordCopyWithImpl<$Res>;
   @override
-  $Res call({String? id, String? businessName, String? role});
+  $Res call({String? id, String? businessName, String? role, String? name});
 }
 
 /// @nodoc
@@ -112,6 +120,7 @@ class __$UserRecordCopyWithImpl<$Res> extends _$UserRecordCopyWithImpl<$Res>
     Object? id = freezed,
     Object? businessName = freezed,
     Object? role = freezed,
+    Object? name = freezed,
   }) {
     return _then(_UserRecord(
       id: id == freezed
@@ -126,6 +135,10 @@ class __$UserRecordCopyWithImpl<$Res> extends _$UserRecordCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -133,7 +146,7 @@ class __$UserRecordCopyWithImpl<$Res> extends _$UserRecordCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
-  _$_UserRecord({this.id, this.businessName, this.role}) : super._();
+  _$_UserRecord({this.id, this.businessName, this.role, this.name}) : super._();
 
   factory _$_UserRecord.fromJson(Map<String, dynamic> json) =>
       _$$_UserRecordFromJson(json);
@@ -144,10 +157,12 @@ class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
   final String? businessName;
   @override
   final String? role;
+  @override
+  final String? name;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserRecord(id: $id, businessName: $businessName, role: $role)';
+    return 'UserRecord(id: $id, businessName: $businessName, role: $role, name: $name)';
   }
 
   @override
@@ -157,7 +172,8 @@ class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'UserRecord'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('businessName', businessName))
-      ..add(DiagnosticsProperty('role', role));
+      ..add(DiagnosticsProperty('role', role))
+      ..add(DiagnosticsProperty('name', name));
   }
 
   @override
@@ -168,7 +184,8 @@ class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality()
                 .equals(other.businessName, businessName) &&
-            const DeepCollectionEquality().equals(other.role, role));
+            const DeepCollectionEquality().equals(other.role, role) &&
+            const DeepCollectionEquality().equals(other.name, name));
   }
 
   @override
@@ -176,7 +193,8 @@ class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(businessName),
-      const DeepCollectionEquality().hash(role));
+      const DeepCollectionEquality().hash(role),
+      const DeepCollectionEquality().hash(name));
 
   @JsonKey(ignore: true)
   @override
@@ -190,8 +208,11 @@ class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
 }
 
 abstract class _UserRecord extends UserRecord {
-  factory _UserRecord({String? id, String? businessName, String? role}) =
-      _$_UserRecord;
+  factory _UserRecord(
+      {String? id,
+      String? businessName,
+      String? role,
+      String? name}) = _$_UserRecord;
   _UserRecord._() : super._();
 
   factory _UserRecord.fromJson(Map<String, dynamic> json) =
@@ -203,6 +224,8 @@ abstract class _UserRecord extends UserRecord {
   String? get businessName;
   @override
   String? get role;
+  @override
+  String? get name;
   @override
   @JsonKey(ignore: true)
   _$UserRecordCopyWith<_UserRecord> get copyWith =>
