@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_app/presentation/authentication/secondary_user_approval/approve_secondary_user.dart';
 import 'package:inventory_app/presentation/authentication/forgot_password/forgot_password.dart';
 import 'package:inventory_app/presentation/authentication/login/login.dart';
 import 'package:inventory_app/presentation/authentication/role_select.dart';
@@ -31,6 +32,7 @@ part 'app_router.gr.dart';
     AutoRoute(page: StopoverAddUserPage),
     AutoRoute(page: NotificationPage),
     AutoRoute(page: SecondaryWaitPage),
+    AutoRoute(page: SecondaryUserApproval),
   ],            
 )            
 class AppRouter extends _$AppRouter{}

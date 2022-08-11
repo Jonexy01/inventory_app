@@ -22,11 +22,18 @@ class _$NotificationModelTearOff {
   const _$NotificationModelTearOff();
 
   _NotificationModel call(
-      {String? id, String? title, String? body, String userCategory = 'all'}) {
+      {String? id,
+      String? title,
+      String? body,
+      String? notificationType,
+      String? userNotifying,
+      String userCategory = 'all'}) {
     return _NotificationModel(
       id: id,
       title: title,
       body: body,
+      notificationType: notificationType,
+      userNotifying: userNotifying,
       userCategory: userCategory,
     );
   }
@@ -44,6 +51,8 @@ mixin _$NotificationModel {
   String? get id => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get body => throw _privateConstructorUsedError;
+  String? get notificationType => throw _privateConstructorUsedError;
+  String? get userNotifying => throw _privateConstructorUsedError;
   String get userCategory => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -57,7 +66,13 @@ abstract class $NotificationModelCopyWith<$Res> {
   factory $NotificationModelCopyWith(
           NotificationModel value, $Res Function(NotificationModel) then) =
       _$NotificationModelCopyWithImpl<$Res>;
-  $Res call({String? id, String? title, String? body, String userCategory});
+  $Res call(
+      {String? id,
+      String? title,
+      String? body,
+      String? notificationType,
+      String? userNotifying,
+      String userCategory});
 }
 
 /// @nodoc
@@ -74,6 +89,8 @@ class _$NotificationModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = freezed,
     Object? body = freezed,
+    Object? notificationType = freezed,
+    Object? userNotifying = freezed,
     Object? userCategory = freezed,
   }) {
     return _then(_value.copyWith(
@@ -88,6 +105,14 @@ class _$NotificationModelCopyWithImpl<$Res>
       body: body == freezed
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
+              as String?,
+      notificationType: notificationType == freezed
+          ? _value.notificationType
+          : notificationType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userNotifying: userNotifying == freezed
+          ? _value.userNotifying
+          : userNotifying // ignore: cast_nullable_to_non_nullable
               as String?,
       userCategory: userCategory == freezed
           ? _value.userCategory
@@ -104,7 +129,13 @@ abstract class _$NotificationModelCopyWith<$Res>
           _NotificationModel value, $Res Function(_NotificationModel) then) =
       __$NotificationModelCopyWithImpl<$Res>;
   @override
-  $Res call({String? id, String? title, String? body, String userCategory});
+  $Res call(
+      {String? id,
+      String? title,
+      String? body,
+      String? notificationType,
+      String? userNotifying,
+      String userCategory});
 }
 
 /// @nodoc
@@ -123,6 +154,8 @@ class __$NotificationModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = freezed,
     Object? body = freezed,
+    Object? notificationType = freezed,
+    Object? userNotifying = freezed,
     Object? userCategory = freezed,
   }) {
     return _then(_NotificationModel(
@@ -138,6 +171,14 @@ class __$NotificationModelCopyWithImpl<$Res>
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String?,
+      notificationType: notificationType == freezed
+          ? _value.notificationType
+          : notificationType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userNotifying: userNotifying == freezed
+          ? _value.userNotifying
+          : userNotifying // ignore: cast_nullable_to_non_nullable
+              as String?,
       userCategory: userCategory == freezed
           ? _value.userCategory
           : userCategory // ignore: cast_nullable_to_non_nullable
@@ -151,7 +192,12 @@ class __$NotificationModelCopyWithImpl<$Res>
 class _$_NotificationModel extends _NotificationModel
     with DiagnosticableTreeMixin {
   const _$_NotificationModel(
-      {this.id, this.title, this.body, this.userCategory = 'all'})
+      {this.id,
+      this.title,
+      this.body,
+      this.notificationType,
+      this.userNotifying,
+      this.userCategory = 'all'})
       : super._();
 
   factory _$_NotificationModel.fromJson(Map<String, dynamic> json) =>
@@ -163,13 +209,17 @@ class _$_NotificationModel extends _NotificationModel
   final String? title;
   @override
   final String? body;
+  @override
+  final String? notificationType;
+  @override
+  final String? userNotifying;
   @JsonKey()
   @override
   final String userCategory;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NotificationModel(id: $id, title: $title, body: $body, userCategory: $userCategory)';
+    return 'NotificationModel(id: $id, title: $title, body: $body, notificationType: $notificationType, userNotifying: $userNotifying, userCategory: $userCategory)';
   }
 
   @override
@@ -180,6 +230,8 @@ class _$_NotificationModel extends _NotificationModel
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('body', body))
+      ..add(DiagnosticsProperty('notificationType', notificationType))
+      ..add(DiagnosticsProperty('userNotifying', userNotifying))
       ..add(DiagnosticsProperty('userCategory', userCategory));
   }
 
@@ -192,6 +244,10 @@ class _$_NotificationModel extends _NotificationModel
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.body, body) &&
             const DeepCollectionEquality()
+                .equals(other.notificationType, notificationType) &&
+            const DeepCollectionEquality()
+                .equals(other.userNotifying, userNotifying) &&
+            const DeepCollectionEquality()
                 .equals(other.userCategory, userCategory));
   }
 
@@ -201,6 +257,8 @@ class _$_NotificationModel extends _NotificationModel
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(body),
+      const DeepCollectionEquality().hash(notificationType),
+      const DeepCollectionEquality().hash(userNotifying),
       const DeepCollectionEquality().hash(userCategory));
 
   @JsonKey(ignore: true)
@@ -219,6 +277,8 @@ abstract class _NotificationModel extends NotificationModel {
       {String? id,
       String? title,
       String? body,
+      String? notificationType,
+      String? userNotifying,
       String userCategory}) = _$_NotificationModel;
   const _NotificationModel._() : super._();
 
@@ -231,6 +291,10 @@ abstract class _NotificationModel extends NotificationModel {
   String? get title;
   @override
   String? get body;
+  @override
+  String? get notificationType;
+  @override
+  String? get userNotifying;
   @override
   String get userCategory;
   @override

@@ -68,6 +68,10 @@ class _$AppRouter extends RootStackRouter {
     SecondaryWaitPageRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
           routeData: routeData, child: const SecondaryWaitPage());
+    },
+    SecondaryUserApprovalRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const SecondaryUserApproval());
     }
   };
 
@@ -87,7 +91,9 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(StopoverAddUserPageRoute.name,
             path: '/stopover-add-user-page'),
         RouteConfig(NotificationPageRoute.name, path: '/notification-page'),
-        RouteConfig(SecondaryWaitPageRoute.name, path: '/secondary-wait-page')
+        RouteConfig(SecondaryWaitPageRoute.name, path: '/secondary-wait-page'),
+        RouteConfig(SecondaryUserApprovalRoute.name,
+            path: '/secondary-user-approval')
       ];
 }
 
@@ -201,4 +207,14 @@ class SecondaryWaitPageRoute extends PageRouteInfo<void> {
       : super(SecondaryWaitPageRoute.name, path: '/secondary-wait-page');
 
   static const String name = 'SecondaryWaitPageRoute';
+}
+
+/// generated route for
+/// [SecondaryUserApproval]
+class SecondaryUserApprovalRoute extends PageRouteInfo<void> {
+  const SecondaryUserApprovalRoute()
+      : super(SecondaryUserApprovalRoute.name,
+            path: '/secondary-user-approval');
+
+  static const String name = 'SecondaryUserApprovalRoute';
 }
