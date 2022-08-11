@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inventory_app/core/utils/app_colors.dart';
 import 'package:inventory_app/core/utils/constants.dart';
 import 'package:inventory_app/providers/app_providers.dart';
-import 'package:inventory_app/widgets/menu_tile.dart';
+import 'package:inventory_app/widgets/drawer_menu_tile.dart';
 
 class NavigationDrawer extends ConsumerStatefulWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -18,15 +18,18 @@ class _NavigationDrawerState extends ConsumerState<NavigationDrawer> {
   Widget build(BuildContext context) {
     final state = ref.watch(authViewModelProvider);
 
-    return Drawer(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            buildHeader(context,
-                businessName: state.userRecord!.businessName!,
-                name: state.userRecord!.name!),
-            buildBody(context),
-          ],
+    return SizedBox(
+      width: width(context) * 0.8,
+      child: Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              buildHeader(context,
+                  businessName: state.userRecord!.businessName!,
+                  name: state.userRecord!.name!),
+              buildBody(context),
+            ],
+          ),
         ),
       ),
     );
@@ -58,12 +61,12 @@ class _NavigationDrawerState extends ConsumerState<NavigationDrawer> {
   Widget buildBody(context) {
     return ListView.separated(
       shrinkWrap: true,
-      itemBuilder: (context, item) => MenuTile(
+      itemBuilder: (context, item) => DrawerMenuTile(
         menuItem: menuList[item],
       ),
       separatorBuilder: (context, item) => Column(children: const [
-        Divider(color: AppColors.black),
-        SizedBox(height: 16),
+        Divider(color: AppColors.amber,),
+        SizedBox(height: 2),
       ]),
       itemCount: menuList.length,
     );

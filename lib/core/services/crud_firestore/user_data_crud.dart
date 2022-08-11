@@ -19,7 +19,9 @@ class UserDataCrud implements UserDataBaseCrud {
   @override
   Future<void> createUserRecord({required UserRecord userRecord}) async {
     try {
-      await _read(firebaseFirestoreProvider).usersRef().doc(userRecord.id).set({
+      await _read(firebaseFirestoreProvider).usersDocumentRef(userRecord.id)
+      // usersRef().doc(userRecord.id)
+      .set({
         'name': 'unasigned',
         //'role': 'unasigned',
       });

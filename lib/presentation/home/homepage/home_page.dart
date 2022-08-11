@@ -39,7 +39,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: Text('Welcome ' + user!.email!),
+          title: Text('Welcome ' + user!.displayName!),
           actions: <Widget>[
             IconButton(
               onPressed: () async {

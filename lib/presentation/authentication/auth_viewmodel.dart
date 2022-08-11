@@ -77,6 +77,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
         state = state.copyWith(loadStatus: Loader.loaded);
         return ServiceResponse(successMessage: 'Reset email sent successfuly');
       } else {
+        state = state.copyWith(loadStatus: Loader.error);
         return ServiceResponse(errorMessage: enableConnection);
       }
     } on FirebaseAuthException catch (e) {
@@ -105,6 +106,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
           successMessage: 'Verification email sent successfuly',
         );
       } else {
+        state = state.copyWith(loadStatus: Loader.error);
         return ServiceResponse(errorMessage: enableConnection);
       }
     } on FirebaseAuthException catch (e) {
@@ -127,6 +129,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
             _reader(firebaseAuthProvider).currentUser!.emailVerified;
         state = state.copyWith(isEmailVerified: _isEmailVerified);
       } else {
+        state = state.copyWith(loadStatus: Loader.error);
         return ServiceResponse(errorMessage: enableConnection);
       }
     } catch (e) {
@@ -180,6 +183,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
         state = state.copyWith(loadStatus: Loader.loaded, user: null);
         return ServiceResponse(successMessage: 'Signout successful');
       } else {
+        state = state.copyWith(loadStatus: Loader.error);
         return ServiceResponse(errorMessage: enableConnection);
       }
     } catch (e) {
@@ -199,6 +203,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
         state = state.copyWith(loadStatus: Loader.loaded);
         return ServiceResponse(successMessage: 'Name updated successfuly');
       } else {
+        state = state.copyWith(loadStatus: Loader.error);
         return ServiceResponse(errorMessage: enableConnection);
       }
     } on FirebaseAuthException catch (e) {
@@ -226,6 +231,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
         return ServiceResponse(
             successMessage: 'User record fetched successfuly');
       } else {
+        state = state.copyWith(loadStatus: Loader.error);
         return ServiceResponse(errorMessage: enableConnection);
       }
     } on FirebaseException catch (e) {
@@ -240,7 +246,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
   Future<ServiceResponse> updateUserProfile(
       {required String role,
       required String userId,
-      required String businessName,
+      String businessName = '',
       String? name}) async {
     state = state.copyWith(loadStatus: Loader.loading);
     UserRecord userRecord =
@@ -253,6 +259,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
         state = state.copyWith(loadStatus: Loader.loaded);
         return ServiceResponse(successMessage: 'Role updated successfuly');
       } else {
+        state = state.copyWith(loadStatus: Loader.error);
         return ServiceResponse(errorMessage: enableConnection);
       }
     } on FirebaseException catch (e) {

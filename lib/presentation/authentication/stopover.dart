@@ -72,14 +72,14 @@ class _StopoverPageState extends ConsumerState<StopoverPage> {
                             )
                         .then((value) {
                       if (value.successMessage.isNotEmpty) {
-                        SchedulerBinding.instance!
+                        SchedulerBinding.instance
                             .addPostFrameCallback((timeStamp) {
                           AlertFlushbar.showNotification(
                               message: value.successMessage, context: context);
                         });
                         context.router.replace(const HomePageRoute());
                       } else {
-                        SchedulerBinding.instance!
+                        SchedulerBinding.instance
                             .addPostFrameCallback((timeStamp) {
                           handleError(
                               e: value.error ?? value.errorMessage,

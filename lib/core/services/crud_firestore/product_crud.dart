@@ -5,6 +5,7 @@ import 'package:inventory_app/providers/app_providers.dart';
 import 'package:riverpod/riverpod.dart';
 
 abstract class ProductBaseCrud {
+  // Future<void> createProduct({required String userId, required Product product});
   Future<List<Product>> retrieveAllProducts({required String userId});
   Future<String> insertProduct({required String userId, required Product product});
   Future<void> updateProduct({required String userId, required Product product});
@@ -15,6 +16,17 @@ class ProductCrud implements ProductBaseCrud {
   final Reader _read;
 
   const ProductCrud(this._read);
+
+  // @override
+  // Future<void> createProduct({required String userId, required Product product}) async {
+  //   try {
+  //     await _read(firebaseFirestoreProvider).userProductsRef(userId).doc().set({
+  //       product.toDocument()
+  //     });
+  //   } on FirebaseException catch (_) {
+  //     rethrow;
+  //   }
+  // }
 
   @override
   Future<List<Product>> retrieveAllProducts({required String userId}) async {

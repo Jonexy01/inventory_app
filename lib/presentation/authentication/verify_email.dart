@@ -55,7 +55,7 @@ class _VerifyEmailPageState extends ConsumerState<VerifyEmailPage> {
 
   Future checkEmailVerified() async {
     await ref.read(firebaseAuthProvider).currentUser!.reload();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       if (mounted) {
         setState(() {
           isEmailVerified =
@@ -100,7 +100,7 @@ class _VerifyEmailPageState extends ConsumerState<VerifyEmailPage> {
                   canResendEmail
                       ? userModel.sendVerificationEmail().then((value) {
                           if (value.successMessage.isNotEmpty) {
-                            SchedulerBinding.instance!
+                            SchedulerBinding.instance
                                 .addPostFrameCallback((timeStamp) {
                               AlertFlushbar.showNotification(
                                 message: value.successMessage,

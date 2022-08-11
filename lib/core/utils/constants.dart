@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/core/models/menu_item_model.dart';
+import 'package:inventory_app/core/models/drawer_menu_item_model.dart';
 import 'package:inventory_app/router/app_router.dart';
 
 const String emptyPasswordField = 'Password field cannot be empty';
@@ -32,20 +32,21 @@ double height(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-List<MenuItem> menuList = [
-  MenuItem(
+List<DrawerMenuItem> menuList = [
+  DrawerMenuItem(
     leading: const Icon(Icons.home_outlined),
     titleText: 'Home',
     route: const HomePageRoute(),
   ),
-  MenuItem(
+  DrawerMenuItem(
     leading: const Icon(Icons.notifications_outlined),
     titleText: 'Notifications',
+    route: const NotificationPageRoute(),
   ),
-  MenuItem(
+  DrawerMenuItem(
     leading: const Icon(Icons.logout_outlined),
     titleText: 'Logout',
-    onTap: () {},
+    // onTap: () {},
     route: const LandingPageRoute(),
   ),
 ];

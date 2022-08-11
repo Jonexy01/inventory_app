@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inventory_app/core/services/service_utils.dart';
 import 'package:inventory_app/providers/app_providers.dart';
 // import 'package:inventory_app/core/services/local_database/hive_keys.dart';
 // import 'package:inventory_app/core/services/local_database/local_database.dart';
@@ -21,9 +23,19 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     super.initState();
     if (ref.read(firebaseAuthProvider).currentUser != null) {
       ref.read(authViewModelProvider.notifier).fetchUserRecord().then((value) {
-        Future.delayed(const Duration(seconds: 5), () {
+        if (value.successMessage.isNotEmpty) {
+          Future.delayed(const Duration(seconds: 5), () {
           context.router.replace(const WrapperRoute());
         });
+        } else {
+          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            handleError(e: value.error ?? value.errorMessage, context: context);
+          });
+          Future.delayed(const Duration(seconds: 5), () {
+            context.router.replace(const LandingPageRoute());
+          });
+        }
+        
       });
     } else {
       Future.delayed(const Duration(seconds: 5), () {

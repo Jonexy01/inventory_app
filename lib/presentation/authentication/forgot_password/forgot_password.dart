@@ -64,7 +64,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
                     final response =
                         await model.resetPassword(_emailController.text.trim());
                     if (response.successMessage.isNotEmpty) {
-                      SchedulerBinding.instance!
+                      SchedulerBinding.instance
                           .addPostFrameCallback((timeStamp) {
                         AlertFlushbar.showNotification(
                           message: response.successMessage,

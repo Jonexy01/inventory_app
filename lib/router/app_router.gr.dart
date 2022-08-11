@@ -60,6 +60,14 @@ class _$AppRouter extends RootStackRouter {
     StopoverAddUserPageRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
           routeData: routeData, child: const StopoverAddUserPage());
+    },
+    NotificationPageRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const NotificationPage());
+    },
+    SecondaryWaitPageRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const SecondaryWaitPage());
     }
   };
 
@@ -77,7 +85,9 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(StopoverPageRoute.name, path: '/stopover-page'),
         RouteConfig(RoleSelectPageRoute.name, path: '/role-select-page'),
         RouteConfig(StopoverAddUserPageRoute.name,
-            path: '/stopover-add-user-page')
+            path: '/stopover-add-user-page'),
+        RouteConfig(NotificationPageRoute.name, path: '/notification-page'),
+        RouteConfig(SecondaryWaitPageRoute.name, path: '/secondary-wait-page')
       ];
 }
 
@@ -173,4 +183,22 @@ class StopoverAddUserPageRoute extends PageRouteInfo<void> {
       : super(StopoverAddUserPageRoute.name, path: '/stopover-add-user-page');
 
   static const String name = 'StopoverAddUserPageRoute';
+}
+
+/// generated route for
+/// [NotificationPage]
+class NotificationPageRoute extends PageRouteInfo<void> {
+  const NotificationPageRoute()
+      : super(NotificationPageRoute.name, path: '/notification-page');
+
+  static const String name = 'NotificationPageRoute';
+}
+
+/// generated route for
+/// [SecondaryWaitPage]
+class SecondaryWaitPageRoute extends PageRouteInfo<void> {
+  const SecondaryWaitPageRoute()
+      : super(SecondaryWaitPageRoute.name, path: '/secondary-wait-page');
+
+  static const String name = 'SecondaryWaitPageRoute';
 }

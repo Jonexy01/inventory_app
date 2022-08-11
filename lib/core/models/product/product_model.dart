@@ -16,7 +16,7 @@ abstract class Product implements _$Product{
     @Default(false) bool obtained,
   }) = _Product;
 
-  //returns product with a name with obtained set to false
+  ///returns product with a name with obtained set to false
   factory Product.empty() => const Product(name: '');
 
   factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
