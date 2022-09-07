@@ -28,6 +28,14 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+
+  @override
+  void initState() {
+    final model = ref.read(homepageViewModelProvider.notifier);
+    model.getToken();
+    model.requestNotificationPermissions();
+    super.initState();
+  }
   //final AuthService _auth = AuthService();
 
   @override

@@ -12,6 +12,7 @@ _$_UserRecord _$$_UserRecordFromJson(Map<String, dynamic> json) =>
       businessName: json['businessName'] as String?,
       role: json['role'] as String?,
       name: json['name'] as String?,
+      fcmToken: json['fcmToken'] as String?,
     );
 
 Map<String, dynamic> _$$_UserRecordToJson(_$_UserRecord instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$_UserRecordToJson(_$_UserRecord instance) =>
       'businessName': instance.businessName,
       'role': instance.role,
       'name': instance.name,
+      'fcmToken': instance.fcmToken,
     };
