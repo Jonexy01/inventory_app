@@ -22,6 +22,7 @@ abstract class NotificationModel implements _$NotificationModel {
       _$NotificationModelFromJson(json);
 
   factory NotificationModel.fromDocument(DocumentSnapshot doc) {
+    if (doc.data() == null) {return const NotificationModel();}
     final data = doc.data() as Map<String, dynamic>;
     return NotificationModel.fromJson(data).copyWith(id: doc.id);
   }

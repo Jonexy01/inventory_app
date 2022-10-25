@@ -34,6 +34,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     final model = ref.read(homepageViewModelProvider.notifier);
     model.getToken();
     model.requestNotificationPermissions();
+    model.configureMessaging(navigateToNotifications: () {});
     super.initState();
   }
   //final AuthService _auth = AuthService();

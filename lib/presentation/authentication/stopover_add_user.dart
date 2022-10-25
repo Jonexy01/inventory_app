@@ -67,6 +67,7 @@ class _StopoverAddUserPageState extends ConsumerState<StopoverAddUserPage> {
                       role: 'secondary',
                       userId: state.user!.uid,
                       name: nameController.text,
+                      email: state.user!.email!,
                     )
                         .then((value) {
                       if (value.successMessage.isNotEmpty) {

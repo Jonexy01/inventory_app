@@ -146,7 +146,8 @@ class AuthViewModel extends StateNotifier<AuthState> {
     try {
       UserCredential userInfo = await _reader(firebaseAuthProvider)
           .createUserWithEmailAndPassword(email: email, password: password);
-      final _userRecord = UserRecord(id: userInfo.user!.uid);
+      final _userRecord =
+          UserRecord(id: userInfo.user!.uid, email: userInfo.user!.email);
       await _reader(userDataCrudProvider)
           .createUserRecord(userRecord: _userRecord);
       //HiveStorage.put(HiveKeys.isRoleSelected, false);
@@ -215,13 +216,22 @@ class AuthViewModel extends StateNotifier<AuthState> {
     }
   }
 
+  void fetchCurrrentUser() {
+    final currentUser = _reader(firebaseAuthProvider).currentUser;
+    if (currentUser != null) {
+      state = state.copyWith(
+        user: currentUser,
+      );
+    }
+  }
+
   Future<ServiceResponse> fetchUserRecord() async {
     state = state.copyWith(loadStatus: Loader.loading);
     try {
       final cResult = await Connectivity().checkConnectivity();
       if (cResult != ConnectivityResult.none) {
         final userInfo = _reader(firebaseAuthProvider).currentUser;
-        final _userRecord = await _reader(userDataCrudProvider)
+        final UserRecord? _userRecord = await _reader(userDataCrudProvider)
             .retrieveUserRecord(uid: userInfo!.uid);
         state = state.copyWith(
           userRecord: _userRecord,
@@ -243,20 +253,26 @@ class AuthViewModel extends StateNotifier<AuthState> {
     }
   }
 
-  Future<ServiceResponse> updateUserProfile(
-      {required String role,
-      required String userId,
-      String businessName = '',
-      String? name}) async {
+  Future<ServiceResponse> updateUserProfile({
+    required String role,
+    required String userId,
+    String businessName = '',
+    String? name,
+    required String email,
+  }) async {
     state = state.copyWith(loadStatus: Loader.loading);
-    UserRecord userRecord =
-        UserRecord(id: userId, role: role, businessName: businessName, name: name,);
+    UserRecord userRecord = UserRecord(
+        id: userId,
+        role: role,
+        businessName: businessName,
+        name: name,
+        email: email);
     try {
       final cResult = await Connectivity().checkConnectivity();
       if (cResult != ConnectivityResult.none) {
         await _reader(userDataCrudProvider)
             .updateUserRecord(userRecord: userRecord);
-        state = state.copyWith(loadStatus: Loader.loaded);
+        state = state.copyWith(loadStatus: Loader.loaded, userRecord: userRecord);
         return ServiceResponse(successMessage: 'Role updated successfuly');
       } else {
         state = state.copyWith(loadStatus: Loader.error);

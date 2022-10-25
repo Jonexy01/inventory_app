@@ -15,12 +15,14 @@ abstract class UserRecord implements _$UserRecord {
     String? role,
     String? name,
     String? fcmToken,
+    String? email,
   }) = _UserRecord;
 
   factory UserRecord.fromJson(Map<String, dynamic> json) =>
       _$UserRecordFromJson(json);
 
   factory UserRecord.fromDocument(DocumentSnapshot doc) {
+    if (doc.data() == null) {return UserRecord();}
     final data = doc.data() as Map<String, dynamic>;
     return UserRecord.fromJson(data).copyWith(id: doc.id);
   }

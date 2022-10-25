@@ -22,6 +22,7 @@ abstract class Product implements _$Product{
   factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 
   factory Product.fromDocument(DocumentSnapshot doc) {
+    if (doc.data() == null) {return const Product();}
     final data = doc.data() as Map<String, dynamic>;
     return Product.fromJson(data).copyWith(id: doc.id);
   }

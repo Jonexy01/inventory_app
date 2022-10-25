@@ -63,12 +63,14 @@ class _StopoverPageState extends ConsumerState<StopoverPage> {
                           e: response.error ?? response.errorMessage,
                           context: context);
                     }
+                    model.fetchCurrrentUser();
                     model
                         .updateUserProfile(
                             role: 'primary',
                             userId: state.user!.uid,
                             businessName: businessNameController.text,
                             name: nameController.text,
+                            email: state.user!.email!,
                             )
                         .then((value) {
                       if (value.successMessage.isNotEmpty) {
