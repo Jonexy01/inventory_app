@@ -28,7 +28,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           context.router.replace(const WrapperRoute());
         });
         } else {
-          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
             handleError(e: value.error ?? value.errorMessage, context: context);
           });
           Future.delayed(const Duration(seconds: 5), () {

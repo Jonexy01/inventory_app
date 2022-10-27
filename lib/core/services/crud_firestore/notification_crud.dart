@@ -9,6 +9,7 @@ abstract class NotificationBaseCrud {
   Future<List<NotificationModel>> retrieveNotificationCategory({required String userId, required String userCategory});
   Future<String> insertNotification({required String userId, required NotificationModel notification});
   Future<void> deleteNotification({required String userId, required String notificationId});
+  Future<void> createNotification({required String userId, required NotificationModel notification});
 }
 
 class NotificationCrud implements NotificationBaseCrud {
@@ -44,6 +45,18 @@ class NotificationCrud implements NotificationBaseCrud {
           .notificationsRef(userId)
           .add(notification.toDocument());
       return docRef.id;
+    } on FirebaseException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> createNotification({required String userId, required NotificationModel notification}) async {
+    try {
+      final docRef = await _read(firebaseFirestoreProvider)
+          .notificationsDocumentRef(userId)
+          .set(notification.toDocument());
+      //return docRef.id;
     } on FirebaseException catch (_) {
       rethrow;
     }

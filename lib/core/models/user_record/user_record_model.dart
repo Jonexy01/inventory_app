@@ -16,6 +16,7 @@ abstract class UserRecord implements _$UserRecord {
     String? name,
     String? fcmToken,
     String? email,
+    String? primaryUserId,
   }) = _UserRecord;
 
   factory UserRecord.fromJson(Map<String, dynamic> json) =>

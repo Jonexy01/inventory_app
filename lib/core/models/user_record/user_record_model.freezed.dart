@@ -27,7 +27,8 @@ class _$UserRecordTearOff {
       String? role,
       String? name,
       String? fcmToken,
-      String? email}) {
+      String? email,
+      String? primaryUserId}) {
     return _UserRecord(
       id: id,
       businessName: businessName,
@@ -35,6 +36,7 @@ class _$UserRecordTearOff {
       name: name,
       fcmToken: fcmToken,
       email: email,
+      primaryUserId: primaryUserId,
     );
   }
 
@@ -54,6 +56,7 @@ mixin _$UserRecord {
   String? get name => throw _privateConstructorUsedError;
   String? get fcmToken => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
+  String? get primaryUserId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -72,7 +75,8 @@ abstract class $UserRecordCopyWith<$Res> {
       String? role,
       String? name,
       String? fcmToken,
-      String? email});
+      String? email,
+      String? primaryUserId});
 }
 
 /// @nodoc
@@ -91,6 +95,7 @@ class _$UserRecordCopyWithImpl<$Res> implements $UserRecordCopyWith<$Res> {
     Object? name = freezed,
     Object? fcmToken = freezed,
     Object? email = freezed,
+    Object? primaryUserId = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -117,6 +122,10 @@ class _$UserRecordCopyWithImpl<$Res> implements $UserRecordCopyWith<$Res> {
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
+      primaryUserId: primaryUserId == freezed
+          ? _value.primaryUserId
+          : primaryUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -133,7 +142,8 @@ abstract class _$UserRecordCopyWith<$Res> implements $UserRecordCopyWith<$Res> {
       String? role,
       String? name,
       String? fcmToken,
-      String? email});
+      String? email,
+      String? primaryUserId});
 }
 
 /// @nodoc
@@ -154,6 +164,7 @@ class __$UserRecordCopyWithImpl<$Res> extends _$UserRecordCopyWithImpl<$Res>
     Object? name = freezed,
     Object? fcmToken = freezed,
     Object? email = freezed,
+    Object? primaryUserId = freezed,
   }) {
     return _then(_UserRecord(
       id: id == freezed
@@ -180,6 +191,10 @@ class __$UserRecordCopyWithImpl<$Res> extends _$UserRecordCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
+      primaryUserId: primaryUserId == freezed
+          ? _value.primaryUserId
+          : primaryUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -193,7 +208,8 @@ class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
       this.role,
       this.name,
       this.fcmToken,
-      this.email})
+      this.email,
+      this.primaryUserId})
       : super._();
 
   factory _$_UserRecord.fromJson(Map<String, dynamic> json) =>
@@ -211,10 +227,12 @@ class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
   final String? fcmToken;
   @override
   final String? email;
+  @override
+  final String? primaryUserId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserRecord(id: $id, businessName: $businessName, role: $role, name: $name, fcmToken: $fcmToken, email: $email)';
+    return 'UserRecord(id: $id, businessName: $businessName, role: $role, name: $name, fcmToken: $fcmToken, email: $email, primaryUserId: $primaryUserId)';
   }
 
   @override
@@ -227,7 +245,8 @@ class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('role', role))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('fcmToken', fcmToken))
-      ..add(DiagnosticsProperty('email', email));
+      ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('primaryUserId', primaryUserId));
   }
 
   @override
@@ -241,7 +260,9 @@ class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
             const DeepCollectionEquality().equals(other.role, role) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.fcmToken, fcmToken) &&
-            const DeepCollectionEquality().equals(other.email, email));
+            const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality()
+                .equals(other.primaryUserId, primaryUserId));
   }
 
   @override
@@ -252,7 +273,8 @@ class _$_UserRecord extends _UserRecord with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(role),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(fcmToken),
-      const DeepCollectionEquality().hash(email));
+      const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(primaryUserId));
 
   @JsonKey(ignore: true)
   @override
@@ -272,7 +294,8 @@ abstract class _UserRecord extends UserRecord {
       String? role,
       String? name,
       String? fcmToken,
-      String? email}) = _$_UserRecord;
+      String? email,
+      String? primaryUserId}) = _$_UserRecord;
   _UserRecord._() : super._();
 
   factory _UserRecord.fromJson(Map<String, dynamic> json) =
@@ -290,6 +313,8 @@ abstract class _UserRecord extends UserRecord {
   String? get fcmToken;
   @override
   String? get email;
+  @override
+  String? get primaryUserId;
   @override
   @JsonKey(ignore: true)
   _$UserRecordCopyWith<_UserRecord> get copyWith =>

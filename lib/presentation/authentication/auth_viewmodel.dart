@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:inventory_app/core/models/notification_model/notification_model.dart';
 import 'package:inventory_app/core/models/service_response_model.dart';
 import 'package:inventory_app/core/models/user_record/user_record_model.dart';
 import 'package:inventory_app/core/utils/constants.dart';
@@ -266,13 +267,16 @@ class AuthViewModel extends StateNotifier<AuthState> {
         role: role,
         businessName: businessName,
         name: name,
-        email: email);
+        email: email,
+        primaryUserId:
+            role == 'primary' ? userId : state.primaryUserRecord!.id);
     try {
       final cResult = await Connectivity().checkConnectivity();
       if (cResult != ConnectivityResult.none) {
         await _reader(userDataCrudProvider)
             .updateUserRecord(userRecord: userRecord);
-        state = state.copyWith(loadStatus: Loader.loaded, userRecord: userRecord);
+        state =
+            state.copyWith(loadStatus: Loader.loaded, userRecord: userRecord);
         return ServiceResponse(successMessage: 'Role updated successfuly');
       } else {
         state = state.copyWith(loadStatus: Loader.error);
@@ -286,6 +290,63 @@ class AuthViewModel extends StateNotifier<AuthState> {
       rethrow;
     }
   }
+
+  Future<ServiceResponse> notifyPrimaryUser(
+      {required NotificationModel notification}) async {
+    try {
+      final cResult = await Connectivity().checkConnectivity();
+      if (cResult != ConnectivityResult.none) {
+        await _reader(notificationCrudProvider).createNotification(
+            userId: notification.userNotifying!, notification: notification);
+        return ServiceResponse(
+            successMessage: 'Notification created successfuly');
+      } else {
+        //state = state.copyWith(loadStatus: Loader.error);
+        return ServiceResponse(errorMessage: enableConnection);
+      }
+    } on FirebaseException catch (e) {
+      //state = state.copyWith(loadStatus: Loader.error);
+      return ServiceResponse(errorMessage: e.code);
+    } catch (e) {
+      //state = state.copyWith(loadStatus: Loader.error);
+      rethrow;
+    }
+  }
+
+  Future<ServiceResponse> fetchPrimaryUser({required String email}) async {
+    if (!(await checkNetwork()))
+      {return ServiceResponse(errorMessage: enableConnection);}
+    try {
+      final response = await _reader(userDataCrudProvider)
+          .retrieveUserRecordByEmail(email: email);
+      if (response.role == 'primary') {
+        state = state.copyWith(primaryUserRecord: response);
+        return ServiceResponse(
+            successMessage: 'Primary user fetched successfuly');
+      } else {
+        return ServiceResponse(errorMessage: 'Email provided is not for a primary user');
+      }
+    } on FirebaseException catch (e) {
+      //state = state.copyWith(loadStatus: Loader.error);
+      return ServiceResponse(errorMessage: e.code);
+    } catch (e) {
+      if (e.runtimeType == RangeError) {
+        return ServiceResponse(
+            errorMessage: 'Provided primary user email is not on record');
+      }
+      //state = state.copyWith(loadStatus: Loader.error);
+      rethrow;
+    }
+  }
+
+  Future<bool> checkNetwork() async {
+    final cResult = await Connectivity().checkConnectivity();
+    if (cResult != ConnectivityResult.none) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 class AuthState {
@@ -293,12 +354,14 @@ class AuthState {
   User? user;
   UserRecord? userRecord;
   bool isEmailVerified;
+  UserRecord? primaryUserRecord;
 
   AuthState({
     this.loadStatus = Loader.idle,
     this.user,
     this.userRecord,
     this.isEmailVerified = false,
+    this.primaryUserRecord,
   });
 
   AuthState copyWith({
@@ -306,12 +369,14 @@ class AuthState {
     User? user,
     UserRecord? userRecord,
     bool? isEmailVerified,
+    UserRecord? primaryUserRecord,
   }) {
     return AuthState(
       loadStatus: loadStatus ?? this.loadStatus,
       user: user ?? this.user,
       userRecord: userRecord ?? this.userRecord,
       isEmailVerified: isEmailVerified ?? this.isEmailVerified,
+      primaryUserRecord: primaryUserRecord ?? this.primaryUserRecord,
     );
   }
 }

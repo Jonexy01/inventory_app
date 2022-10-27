@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inventory_app/core/utils/app_colors.dart';
 import 'package:inventory_app/core/utils/constants.dart';
+import 'package:inventory_app/presentation/authentication/secondary_wait.dart';
 import 'package:inventory_app/presentation/home/homepage/home_page.dart';
 import 'package:inventory_app/providers/app_providers.dart';
 import 'package:inventory_app/router/app_router.dart';
@@ -19,12 +20,28 @@ class _RoleSelectPageState extends ConsumerState<RoleSelectPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.read(authViewModelProvider);
+    final state = ref.watch(authViewModelProvider);
+    final model = ref.read(authViewModelProvider.notifier);
+
+    if (state.userRecord!.role == 'secondary') return const SecondaryWaitPage();
 
     if (state.userRecord!.role != null && state.userRecord!.role!.isNotEmpty) {
       return const HomePage();
     } else {
       return Scaffold(
+        appBar: AppBar(
+          title: const Text('Select Role'),
+          actions: <Widget>[
+            IconButton(
+              onPressed: () async {
+                await model.signout();
+                context.router.replaceAll([const LandingPageRoute()]);
+              },
+              icon: const Icon(Icons.logout),
+              tooltip: 'sign out',
+            ),
+          ],
+        ),
         body: SingleChildScrollView(
           child: Container(
             height: height(context),

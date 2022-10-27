@@ -18,7 +18,9 @@ class _NotificationPageState extends ConsumerState<NotificationPage> {
   @override
   void initState() {
     super.initState();
-    ref.read(notificationViewModelProvider.notifier).fetchAllNotifications();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      ref.read(notificationViewModelProvider.notifier).fetchAllNotifications();
+    });
   }
   //List notifications = [];
 

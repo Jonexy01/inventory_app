@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inventory_app/core/models/notification_model/notification_model.dart';
 import 'package:inventory_app/core/services/service_utils.dart';
 import 'package:inventory_app/core/utils/enums.dart';
 import 'package:inventory_app/core/utils/validator.dart';
@@ -26,12 +27,13 @@ class _StopoverAddUserPageState extends ConsumerState<StopoverAddUserPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.read(authViewModelProvider);
+    final state = ref.watch(authViewModelProvider);
     final model = ref.read(authViewModelProvider.notifier);
 
     return Scaffold(
       body: Center(
         child: Form(
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -62,8 +64,12 @@ class _StopoverAddUserPageState extends ConsumerState<StopoverAddUserPage> {
                           e: response.error ?? response.errorMessage,
                           context: context);
                     }
-                    model
+                    model.fetchCurrrentUser();
+                    final primaryUserResponse = await model.fetchPrimaryUser(email: emailController.text);
+                    if (primaryUserResponse.successMessage.isNotEmpty) {
+                      model
                         .updateUserProfile(
+                      businessName: ref.read(authViewModelProvider).primaryUserRecord!.businessName!,
                       role: 'secondary',
                       userId: state.user!.uid,
                       name: nameController.text,
@@ -71,14 +77,23 @@ class _StopoverAddUserPageState extends ConsumerState<StopoverAddUserPage> {
                     )
                         .then((value) {
                       if (value.successMessage.isNotEmpty) {
-                        SchedulerBinding.instance
+                        model.notifyPrimaryUser(
+                          notification: NotificationModel(
+                            title: 'Approve Secondary User',
+                            body: 'Click to Approve or Decline',
+                            userCategory: 'primary',
+                            userNotifying: state.primaryUserRecord!.id,
+                            notificationType: 'SecondaryApproval'
+                          ),
+                        );
+                        SchedulerBinding.instance!
                             .addPostFrameCallback((timeStamp) {
                           AlertFlushbar.showNotification(
                               message: value.successMessage, context: context);
                         });
                         context.router.replace(const SecondaryWaitPageRoute());
                       } else {
-                        SchedulerBinding.instance
+                        SchedulerBinding.instance!
                             .addPostFrameCallback((timeStamp) {
                           handleError(
                               e: value.error ?? value.errorMessage,
@@ -86,6 +101,12 @@ class _StopoverAddUserPageState extends ConsumerState<StopoverAddUserPage> {
                         });
                       }
                     });
+                    } else {
+                      handleError(
+                          e: primaryUserResponse.error ?? primaryUserResponse.errorMessage,
+                          context: context);
+                    }
+                    
                   }
                 },
               ),

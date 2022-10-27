@@ -155,7 +155,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                           password: _passwordController.text,
                         );
                         if (myResult.successMessage.isNotEmpty) {
-                          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+                          SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
                             AlertFlushbar.showNotification(
                             message: myResult.successMessage,
                             context: context,
@@ -165,7 +165,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                           context.router
                               .replaceAll([const VerifyEmailPageRoute()]);
                         } else {
-                          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+                          SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
                             handleError(
                               e: myResult.error ?? myResult.errorMessage,
                               context: context);

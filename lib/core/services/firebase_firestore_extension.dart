@@ -5,6 +5,8 @@ extension FirebaseFirestoreX on FirebaseFirestore {
 
   DocumentReference usersDocumentRef(uid) => collection('users').doc(uid);
 
+  CollectionReference secondaryUsersRef(String userId) => collection('users').doc(userId).collection('secondaryUsers');
+
   CollectionReference userProductsRef(String userId) =>
       collection('users').doc(userId).collection('products');
 
@@ -15,5 +17,5 @@ extension FirebaseFirestoreX on FirebaseFirestore {
       collection('users').doc(userId).collection('notifications');
 
   DocumentReference notificationsDocumentRef(String userId) => 
-    collection('users').doc(userId).collection('products').doc();
+    collection('users').doc(userId).collection('notifications').doc();
 }

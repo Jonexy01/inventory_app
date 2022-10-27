@@ -26,7 +26,7 @@ class _StopoverPageState extends ConsumerState<StopoverPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.read(authViewModelProvider);
+    final state = ref.watch(authViewModelProvider);
     final model = ref.read(authViewModelProvider.notifier);
 
     return Scaffold(
@@ -74,14 +74,14 @@ class _StopoverPageState extends ConsumerState<StopoverPage> {
                             )
                         .then((value) {
                       if (value.successMessage.isNotEmpty) {
-                        SchedulerBinding.instance
+                        SchedulerBinding.instance!
                             .addPostFrameCallback((timeStamp) {
                           AlertFlushbar.showNotification(
                               message: value.successMessage, context: context);
                         });
                         context.router.replace(const HomePageRoute());
                       } else {
-                        SchedulerBinding.instance
+                        SchedulerBinding.instance!
                             .addPostFrameCallback((timeStamp) {
                           handleError(
                               e: value.error ?? value.errorMessage,

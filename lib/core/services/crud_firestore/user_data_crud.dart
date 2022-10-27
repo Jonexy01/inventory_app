@@ -8,10 +8,10 @@ abstract class UserDataBaseCrud {
   Future<void> createUserRecord({required UserRecord userRecord});
   Future<void> updateUserRecord({required UserRecord userRecord});
   Future<UserRecord> retrieveUserRecord({required String uid});
+  Future<UserRecord> retrieveUserRecordByEmail({required String email});
 }
 
 class UserDataCrud implements UserDataBaseCrud {
-
   final Reader _read;
 
   const UserDataCrud(this._read);
@@ -20,8 +20,8 @@ class UserDataCrud implements UserDataBaseCrud {
   Future<void> createUserRecord({required UserRecord userRecord}) async {
     try {
       await _read(firebaseFirestoreProvider).usersDocumentRef(userRecord.id)
-      // usersRef().doc(userRecord.id)
-      .set({
+          // usersRef().doc(userRecord.id)
+          .set({
         'name': 'unasigned',
         //'role': 'unasigned',
       });
@@ -34,7 +34,10 @@ class UserDataCrud implements UserDataBaseCrud {
   Future<void> updateUserRecord({required UserRecord userRecord}) async {
     Map<String, dynamic> formData = userRecord.toDocument();
     try {
-      await _read(firebaseFirestoreProvider).usersRef().doc(userRecord.id).update(formData);
+      await _read(firebaseFirestoreProvider)
+          .usersRef()
+          .doc(userRecord.id)
+          .update(formData);
     } on FirebaseException catch (_) {
       rethrow;
     }
@@ -43,11 +46,27 @@ class UserDataCrud implements UserDataBaseCrud {
   @override
   Future<UserRecord> retrieveUserRecord({required String uid}) async {
     try {
-      final userDoc = await _read(firebaseFirestoreProvider).usersDocumentRef(uid).get();
+      final userDoc =
+          await _read(firebaseFirestoreProvider).usersDocumentRef(uid).get();
       final userRecord = UserRecord.fromDocument(userDoc);
       return userRecord;
     } on FirebaseException catch (_) {
       rethrow;
     }
-  } 
+  }
+
+  @override
+  Future<UserRecord> retrieveUserRecordByEmail({required String email}) async {
+    try {
+      final userDocs = await _read(firebaseFirestoreProvider)
+          .usersRef()
+          .where("email", isEqualTo: email)
+          .get().then((value) => value.docs.toList());
+      final userDoc = userDocs[0];
+      final userRecord = UserRecord.fromDocument(userDoc);
+      return userRecord;
+    } on FirebaseException catch (_) {
+      rethrow;
+    }
+  }
 }
