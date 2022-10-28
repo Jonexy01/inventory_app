@@ -14,7 +14,9 @@ abstract class NotificationModel implements _$NotificationModel {
     String? title,
     String? body,
     String? notificationType,
+    String? primaryId,
     String? userNotifying,
+    String? userIdNotifying,
     @Default('all') String userCategory,
   }) = _NotificationModel;
 

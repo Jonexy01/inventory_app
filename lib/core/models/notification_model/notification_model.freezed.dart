@@ -26,14 +26,18 @@ class _$NotificationModelTearOff {
       String? title,
       String? body,
       String? notificationType,
+      String? primaryId,
       String? userNotifying,
+      String? userIdNotifying,
       String userCategory = 'all'}) {
     return _NotificationModel(
       id: id,
       title: title,
       body: body,
       notificationType: notificationType,
+      primaryId: primaryId,
       userNotifying: userNotifying,
+      userIdNotifying: userIdNotifying,
       userCategory: userCategory,
     );
   }
@@ -52,7 +56,9 @@ mixin _$NotificationModel {
   String? get title => throw _privateConstructorUsedError;
   String? get body => throw _privateConstructorUsedError;
   String? get notificationType => throw _privateConstructorUsedError;
+  String? get primaryId => throw _privateConstructorUsedError;
   String? get userNotifying => throw _privateConstructorUsedError;
+  String? get userIdNotifying => throw _privateConstructorUsedError;
   String get userCategory => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -71,7 +77,9 @@ abstract class $NotificationModelCopyWith<$Res> {
       String? title,
       String? body,
       String? notificationType,
+      String? primaryId,
       String? userNotifying,
+      String? userIdNotifying,
       String userCategory});
 }
 
@@ -90,7 +98,9 @@ class _$NotificationModelCopyWithImpl<$Res>
     Object? title = freezed,
     Object? body = freezed,
     Object? notificationType = freezed,
+    Object? primaryId = freezed,
     Object? userNotifying = freezed,
+    Object? userIdNotifying = freezed,
     Object? userCategory = freezed,
   }) {
     return _then(_value.copyWith(
@@ -110,9 +120,17 @@ class _$NotificationModelCopyWithImpl<$Res>
           ? _value.notificationType
           : notificationType // ignore: cast_nullable_to_non_nullable
               as String?,
+      primaryId: primaryId == freezed
+          ? _value.primaryId
+          : primaryId // ignore: cast_nullable_to_non_nullable
+              as String?,
       userNotifying: userNotifying == freezed
           ? _value.userNotifying
           : userNotifying // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userIdNotifying: userIdNotifying == freezed
+          ? _value.userIdNotifying
+          : userIdNotifying // ignore: cast_nullable_to_non_nullable
               as String?,
       userCategory: userCategory == freezed
           ? _value.userCategory
@@ -134,7 +152,9 @@ abstract class _$NotificationModelCopyWith<$Res>
       String? title,
       String? body,
       String? notificationType,
+      String? primaryId,
       String? userNotifying,
+      String? userIdNotifying,
       String userCategory});
 }
 
@@ -155,7 +175,9 @@ class __$NotificationModelCopyWithImpl<$Res>
     Object? title = freezed,
     Object? body = freezed,
     Object? notificationType = freezed,
+    Object? primaryId = freezed,
     Object? userNotifying = freezed,
+    Object? userIdNotifying = freezed,
     Object? userCategory = freezed,
   }) {
     return _then(_NotificationModel(
@@ -175,9 +197,17 @@ class __$NotificationModelCopyWithImpl<$Res>
           ? _value.notificationType
           : notificationType // ignore: cast_nullable_to_non_nullable
               as String?,
+      primaryId: primaryId == freezed
+          ? _value.primaryId
+          : primaryId // ignore: cast_nullable_to_non_nullable
+              as String?,
       userNotifying: userNotifying == freezed
           ? _value.userNotifying
           : userNotifying // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userIdNotifying: userIdNotifying == freezed
+          ? _value.userIdNotifying
+          : userIdNotifying // ignore: cast_nullable_to_non_nullable
               as String?,
       userCategory: userCategory == freezed
           ? _value.userCategory
@@ -196,7 +226,9 @@ class _$_NotificationModel extends _NotificationModel
       this.title,
       this.body,
       this.notificationType,
+      this.primaryId,
       this.userNotifying,
+      this.userIdNotifying,
       this.userCategory = 'all'})
       : super._();
 
@@ -212,14 +244,18 @@ class _$_NotificationModel extends _NotificationModel
   @override
   final String? notificationType;
   @override
+  final String? primaryId;
+  @override
   final String? userNotifying;
+  @override
+  final String? userIdNotifying;
   @JsonKey()
   @override
   final String userCategory;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NotificationModel(id: $id, title: $title, body: $body, notificationType: $notificationType, userNotifying: $userNotifying, userCategory: $userCategory)';
+    return 'NotificationModel(id: $id, title: $title, body: $body, notificationType: $notificationType, primaryId: $primaryId, userNotifying: $userNotifying, userIdNotifying: $userIdNotifying, userCategory: $userCategory)';
   }
 
   @override
@@ -231,7 +267,9 @@ class _$_NotificationModel extends _NotificationModel
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('body', body))
       ..add(DiagnosticsProperty('notificationType', notificationType))
+      ..add(DiagnosticsProperty('primaryId', primaryId))
       ..add(DiagnosticsProperty('userNotifying', userNotifying))
+      ..add(DiagnosticsProperty('userIdNotifying', userIdNotifying))
       ..add(DiagnosticsProperty('userCategory', userCategory));
   }
 
@@ -245,8 +283,11 @@ class _$_NotificationModel extends _NotificationModel
             const DeepCollectionEquality().equals(other.body, body) &&
             const DeepCollectionEquality()
                 .equals(other.notificationType, notificationType) &&
+            const DeepCollectionEquality().equals(other.primaryId, primaryId) &&
             const DeepCollectionEquality()
                 .equals(other.userNotifying, userNotifying) &&
+            const DeepCollectionEquality()
+                .equals(other.userIdNotifying, userIdNotifying) &&
             const DeepCollectionEquality()
                 .equals(other.userCategory, userCategory));
   }
@@ -258,7 +299,9 @@ class _$_NotificationModel extends _NotificationModel
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(body),
       const DeepCollectionEquality().hash(notificationType),
+      const DeepCollectionEquality().hash(primaryId),
       const DeepCollectionEquality().hash(userNotifying),
+      const DeepCollectionEquality().hash(userIdNotifying),
       const DeepCollectionEquality().hash(userCategory));
 
   @JsonKey(ignore: true)
@@ -278,7 +321,9 @@ abstract class _NotificationModel extends NotificationModel {
       String? title,
       String? body,
       String? notificationType,
+      String? primaryId,
       String? userNotifying,
+      String? userIdNotifying,
       String userCategory}) = _$_NotificationModel;
   const _NotificationModel._() : super._();
 
@@ -294,7 +339,11 @@ abstract class _NotificationModel extends NotificationModel {
   @override
   String? get notificationType;
   @override
+  String? get primaryId;
+  @override
   String? get userNotifying;
+  @override
+  String? get userIdNotifying;
   @override
   String get userCategory;
   @override

@@ -5,17 +5,21 @@ extension FirebaseFirestoreX on FirebaseFirestore {
 
   DocumentReference usersDocumentRef(uid) => collection('users').doc(uid);
 
-  CollectionReference secondaryUsersRef(String userId) => collection('users').doc(userId).collection('secondaryUsers');
+  CollectionReference secondaryUsersRef(String userId) =>
+      collection('users').doc(userId).collection('secondaryUsers');
+
+  DocumentReference secondaryUsersDocumentRef(uid) =>
+      collection('users').doc(uid).collection('secondaryUsers').doc();
 
   CollectionReference userProductsRef(String userId) =>
       collection('users').doc(userId).collection('products');
 
-  DocumentReference userProductsDocumentRef(String userId) => 
-    collection('users').doc(userId).collection('products').doc();
+  DocumentReference userProductsDocumentRef(String userId) =>
+      collection('users').doc(userId).collection('products').doc();
 
   CollectionReference notificationsRef(String userId) =>
       collection('users').doc(userId).collection('notifications');
 
-  DocumentReference notificationsDocumentRef(String userId) => 
-    collection('users').doc(userId).collection('notifications').doc();
+  DocumentReference notificationsDocumentRef(String userId) =>
+      collection('users').doc(userId).collection('notifications').doc();
 }

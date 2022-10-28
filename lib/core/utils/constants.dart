@@ -32,21 +32,26 @@ double height(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-List<DrawerMenuItem> menuList = [
-  DrawerMenuItem(
-    leading: const Icon(Icons.home_outlined),
-    titleText: 'Home',
-    route: const HomePageRoute(),
-  ),
-  DrawerMenuItem(
-    leading: const Icon(Icons.notifications_outlined),
-    titleText: 'Notifications',
-    route: const NotificationPageRoute(),
-  ),
-  DrawerMenuItem(
-    leading: const Icon(Icons.logout_outlined),
-    titleText: 'Logout',
-    // onTap: () {},
-    route: const LandingPageRoute(),
-  ),
-];
+// List<DrawerMenuItem> menuList = [
+//   DrawerMenuItem(
+//     leading: const Icon(Icons.home_outlined),
+//     titleText: 'Home',
+//     route: const HomePageRoute(),
+//   ),
+//   DrawerMenuItem(
+//     leading: const Icon(Icons.notifications_outlined),
+//     titleText: 'Notifications',
+//     route: const NotificationPageRoute(),
+//   ),
+//   DrawerMenuItem(
+//     leading: const Icon(Icons.person),
+//     titleText: 'Secondary Users',
+//     route: const NotificationPageRoute(),
+//   ),
+//   DrawerMenuItem(
+//     leading: const Icon(Icons.logout_outlined),
+//     titleText: 'Logout',
+//     // onTap: () {},
+//     route: const LandingPageRoute(),
+//   ),
+// ];

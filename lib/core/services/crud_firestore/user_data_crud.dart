@@ -9,6 +9,9 @@ abstract class UserDataBaseCrud {
   Future<void> updateUserRecord({required UserRecord userRecord});
   Future<UserRecord> retrieveUserRecord({required String uid});
   Future<UserRecord> retrieveUserRecordByEmail({required String email});
+  Future<void> createSecondaryUser(
+      {required UserRecord userRecord, required String primaryUid});
+  Future<List<UserRecord>> retrieveSecondaryUserRecords({required String primaryUid});
 }
 
 class UserDataCrud implements UserDataBaseCrud {
@@ -61,11 +64,34 @@ class UserDataCrud implements UserDataBaseCrud {
       final userDocs = await _read(firebaseFirestoreProvider)
           .usersRef()
           .where("email", isEqualTo: email)
-          .get().then((value) => value.docs.toList());
+          .get()
+          .then((value) => value.docs.toList());
       final userDoc = userDocs[0];
       final userRecord = UserRecord.fromDocument(userDoc);
       return userRecord;
     } on FirebaseException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> createSecondaryUser(
+      {required UserRecord userRecord, required String primaryUid}) async {
+    try {
+      await _read(firebaseFirestoreProvider)
+          .secondaryUsersDocumentRef(primaryUid)
+          .set(userRecord.toDocument());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<UserRecord>> retrieveSecondaryUserRecords({required String primaryUid}) async {
+    try {
+      final response = await _read(firebaseFirestoreProvider).secondaryUsersRef(primaryUid).get();
+      return response.docs.map((doc) => UserRecord.fromDocument(doc)).toList();
+    } catch (e) {
       rethrow;
     }
   }

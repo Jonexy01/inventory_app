@@ -10,6 +10,7 @@ import 'package:inventory_app/presentation/authentication/stopover.dart';
 import 'package:inventory_app/presentation/authentication/stopover_add_user.dart';
 import 'package:inventory_app/presentation/authentication/verify_email.dart';
 import 'package:inventory_app/presentation/notification/notification.dart';
+import 'package:inventory_app/presentation/secondary_user_display/secondary_user_display.dart';
 import 'package:inventory_app/presentation/splash/landing_page.dart';
 import 'package:inventory_app/presentation/splash/splash_screen.dart';
 import 'package:inventory_app/presentation/home/homepage/home_page.dart';
@@ -33,6 +34,7 @@ part 'app_router.gr.dart';
     AutoRoute(page: NotificationPage),
     AutoRoute(page: SecondaryWaitPage),
     AutoRoute(page: SecondaryUserApproval),
+    AutoRoute(page: SecondaryUserDisplay),
   ],            
 )            
 class AppRouter extends _$AppRouter{}

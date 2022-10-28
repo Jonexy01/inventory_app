@@ -9,6 +9,7 @@ import 'package:inventory_app/presentation/authentication/auth_viewmodel.dart';
 import 'package:inventory_app/presentation/authentication/secondary_user_approval/approve_secondary_user_viewmodel.dart';
 import 'package:inventory_app/presentation/home/homepage/home_page_viewmodel.dart';
 import 'package:inventory_app/presentation/notification/notification_viewmodel.dart';
+import 'package:inventory_app/presentation/secondary_user_display/secondary_user_display_viewmodel.dart';
 //import 'package:inventory_app/presentation/authentication/signup/signup_viewmodel.dart';
 
 //This file stores all providers that will be used throughout the app.
@@ -62,3 +63,7 @@ final secondaryApprovalViewModelProvider =
 final homepageViewModelProvider =
     StateNotifierProvider<HomePageViewModel, HomePageState>(
         (ref) => HomePageViewModel(ref.read));
+
+final secondaryUsersViewModel =
+    StateNotifierProvider<SecondaryUsersViewModel, SecondaryUsersState>(
+        (ref) => SecondaryUsersViewModel(ref.read));

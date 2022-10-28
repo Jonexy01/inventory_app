@@ -339,6 +339,24 @@ class AuthViewModel extends StateNotifier<AuthState> {
     }
   }
 
+  Future<ServiceResponse> fetchSecondaryUser({required String secondaryUserId}) async {
+    if (!(await checkNetwork()))
+      {return ServiceResponse(errorMessage: enableConnection);}
+    try{
+      final response = await _reader(userDataCrudProvider).retrieveUserRecord(uid: secondaryUserId);
+      state = state.copyWith(secondaryUserRecord: response,);
+      return ServiceResponse(successMessage: 'Secondary user fetched succssefuly');
+    } on FirebaseException catch (e) {
+      return ServiceResponse(errorMessage: e.code);
+    } catch (e) {
+      // if (e.runtimeType == RangeError) {
+      //   return ServiceResponse(
+      //       errorMessage: 'Provided primary user email is not on record');
+      // }
+      rethrow;
+    }
+  }
+
   Future<bool> checkNetwork() async {
     final cResult = await Connectivity().checkConnectivity();
     if (cResult != ConnectivityResult.none) {
@@ -355,6 +373,7 @@ class AuthState {
   UserRecord? userRecord;
   bool isEmailVerified;
   UserRecord? primaryUserRecord;
+  UserRecord? secondaryUserRecord;
 
   AuthState({
     this.loadStatus = Loader.idle,
@@ -362,6 +381,7 @@ class AuthState {
     this.userRecord,
     this.isEmailVerified = false,
     this.primaryUserRecord,
+    this.secondaryUserRecord,
   });
 
   AuthState copyWith({
@@ -370,6 +390,7 @@ class AuthState {
     UserRecord? userRecord,
     bool? isEmailVerified,
     UserRecord? primaryUserRecord,
+    UserRecord? secondaryUserRecord,
   }) {
     return AuthState(
       loadStatus: loadStatus ?? this.loadStatus,
@@ -377,6 +398,7 @@ class AuthState {
       userRecord: userRecord ?? this.userRecord,
       isEmailVerified: isEmailVerified ?? this.isEmailVerified,
       primaryUserRecord: primaryUserRecord ?? this.primaryUserRecord,
+      secondaryUserRecord: secondaryUserRecord ?? this.secondaryUserRecord,
     );
   }
 }
