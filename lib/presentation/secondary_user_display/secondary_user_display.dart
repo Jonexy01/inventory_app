@@ -14,7 +14,9 @@ class _SecondaryUserDisplayState extends ConsumerState<SecondaryUserDisplay> {
   @override
   void initState() {
     super.initState();
-    ref.read(secondaryUsersViewModel.notifier).fetchSecondaryUsers();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      ref.read(secondaryUsersViewModel.notifier).fetchSecondaryUsers();
+    });
   }
 
   @override
@@ -25,7 +27,7 @@ class _SecondaryUserDisplayState extends ConsumerState<SecondaryUserDisplay> {
       appBar: AppBar(
         title: const Text('Secondary Users'),
       ),
-      body: state.secondaryUsers!.isEmpty
+      body: state.secondaryUsers == null || state.secondaryUsers!.isEmpty
           ? const Center(
               child: Text('No Secondary User to display'),
             )
@@ -33,7 +35,9 @@ class _SecondaryUserDisplayState extends ConsumerState<SecondaryUserDisplay> {
               child: ListView.separated(
                 shrinkWrap: true,
                 physics: const ClampingScrollPhysics(),
-                itemBuilder: (context, index) => ListTile(title: Text(state.secondaryUsers![index].name!),),
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(state.secondaryUsers![index].name!),
+                ),
                 separatorBuilder: (context, index) => const SizedBox(height: 3),
                 itemCount: state.secondaryUsers!.length,
               ),

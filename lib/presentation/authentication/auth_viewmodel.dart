@@ -297,7 +297,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
       final cResult = await Connectivity().checkConnectivity();
       if (cResult != ConnectivityResult.none) {
         await _reader(notificationCrudProvider).createNotification(
-            userId: notification.userNotifying!, notification: notification);
+            userId: notification.primaryId!, notification: notification);
         return ServiceResponse(
             successMessage: 'Notification created successfuly');
       } else {
@@ -374,6 +374,7 @@ class AuthState {
   bool isEmailVerified;
   UserRecord? primaryUserRecord;
   UserRecord? secondaryUserRecord;
+  bool approved;
 
   AuthState({
     this.loadStatus = Loader.idle,
@@ -382,6 +383,7 @@ class AuthState {
     this.isEmailVerified = false,
     this.primaryUserRecord,
     this.secondaryUserRecord,
+    this.approved = false,
   });
 
   AuthState copyWith({
@@ -391,6 +393,7 @@ class AuthState {
     bool? isEmailVerified,
     UserRecord? primaryUserRecord,
     UserRecord? secondaryUserRecord,
+    bool? approved,
   }) {
     return AuthState(
       loadStatus: loadStatus ?? this.loadStatus,
@@ -399,6 +402,7 @@ class AuthState {
       isEmailVerified: isEmailVerified ?? this.isEmailVerified,
       primaryUserRecord: primaryUserRecord ?? this.primaryUserRecord,
       secondaryUserRecord: secondaryUserRecord ?? this.secondaryUserRecord,
+      approved: approved ?? this.approved,
     );
   }
 }

@@ -5,7 +5,6 @@ import 'package:inventory_app/core/services/service_utils.dart';
 import 'package:inventory_app/core/utils/constants.dart';
 import 'package:inventory_app/core/utils/enums.dart';
 import 'package:inventory_app/providers/app_providers.dart';
-import 'package:inventory_app/router/app_router.dart';
 import 'package:inventory_app/widgets/alert_flushbar.dart';
 import 'package:inventory_app/widgets/app_options_dialogue.dart';
 import 'package:inventory_app/widgets/app_spinkit.dart';
@@ -73,22 +72,23 @@ class _NotificationPageState extends ConsumerState<NotificationPage> {
                                   provider: notificationViewModelProvider,
                                   title: 'Approve',
                                   subtitle:
-                                      'Please approve/decline secondary user ${state.notification!.userNotifying}',
+                                      'Please approve/decline secondary user ${ref.read(notificationViewModelProvider).notification!.userNotifying}',
                                   onPressedproceed: () async {
                                     final response1 =
                                         await model.fetchSecondaryUser(
-                                            secondaryUserId:
-                                                userState.user!.uid);
+                                            secondaryUserId: ref.read(notificationViewModelProvider).notification!.userIdNotifying!
+                                                //userState.user!.uid
+                                                );
                                     if (response1.successMessage.isNotEmpty) {
                                       final response2 =
                                           await model.addSecondaryUser(
-                                              userRecord: userState
+                                              userRecord: ref.read(notificationViewModelProvider)
                                                   .secondaryUserRecord!,
                                               primaryUid: userState.user!.uid);
                                       if (response2.successMessage.isNotEmpty) {
                                         await model.removeNotification(
                                             notificationId:
-                                                state.notification!.id!);
+                                                ref.read(notificationViewModelProvider).notification!.id!);
                                         model.fetchAllNotifications();
                                         WidgetsBinding.instance!
                                             .addPostFrameCallback((timeStamp) {
@@ -141,6 +141,7 @@ class _NotificationPageState extends ConsumerState<NotificationPage> {
                           child: ListTile(
                             title: Text(state.notifications![item].title!),
                             subtitle: Text(state.notifications![item].body!),
+                            trailing: Text(state.notifications![item].userNotifying!),
                           ),
                         )),
                     separatorBuilder: (context, item) =>

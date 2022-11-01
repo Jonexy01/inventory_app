@@ -78,6 +78,7 @@ class NotificationViewModel extends StateNotifier<NotificationState> {
     try {
       await reader(userDataCrudProvider)
           .createSecondaryUser(userRecord: userRecord, primaryUid: primaryUid);
+      await reader(userDataCrudProvider).updateSecondaryUserApproval(uid: userRecord.id!);
       state = state.copyWith(dialogueLoader: Loader.loaded);
       return ServiceResponse(
           successMessage: 'Secondary user added successfuly');

@@ -7,10 +7,12 @@ import 'package:inventory_app/providers/app_providers.dart';
 abstract class UserDataBaseCrud {
   Future<void> createUserRecord({required UserRecord userRecord});
   Future<void> updateUserRecord({required UserRecord userRecord});
+  Future<void> updateFcmToken({required String uid, required String fcmToken});
   Future<UserRecord> retrieveUserRecord({required String uid});
   Future<UserRecord> retrieveUserRecordByEmail({required String email});
   Future<void> createSecondaryUser(
       {required UserRecord userRecord, required String primaryUid});
+  Future<void> updateSecondaryUserApproval({required String uid});
   Future<List<UserRecord>> retrieveSecondaryUserRecords({required String primaryUid});
 }
 
@@ -42,6 +44,15 @@ class UserDataCrud implements UserDataBaseCrud {
           .doc(userRecord.id)
           .update(formData);
     } on FirebaseException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> updateFcmToken({required String uid, required String fcmToken}) async {
+    try {
+      await _read(firebaseFirestoreProvider).usersDocumentRef(uid).update({"fcmToken": fcmToken});
+    } catch (e) {
       rethrow;
     }
   }
@@ -79,8 +90,17 @@ class UserDataCrud implements UserDataBaseCrud {
       {required UserRecord userRecord, required String primaryUid}) async {
     try {
       await _read(firebaseFirestoreProvider)
-          .secondaryUsersDocumentRef(primaryUid)
+          .secondaryUsersDocumentRef(primaryUid, userRecord.id!)
           .set(userRecord.toDocument());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> updateSecondaryUserApproval({required String uid}) async {
+    try {
+      await _read(firebaseFirestoreProvider).usersDocumentRef(uid).update({"approved": true});
     } catch (e) {
       rethrow;
     }

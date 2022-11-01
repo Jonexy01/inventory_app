@@ -76,6 +76,18 @@ class _$AppRouter extends RootStackRouter {
     SecondaryUserDisplayRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
           routeData: routeData, child: const SecondaryUserDisplay());
+    },
+    ManageProductsScreenRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const ManageProductsScreen());
+    },
+    AddProductScreenRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const AddProductScreen());
+    },
+    UpdateProductScreenRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const UpdateProductScreen());
     }
   };
 
@@ -99,7 +111,12 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(SecondaryUserApprovalRoute.name,
             path: '/secondary-user-approval'),
         RouteConfig(SecondaryUserDisplayRoute.name,
-            path: '/secondary-user-display')
+            path: '/secondary-user-display'),
+        RouteConfig(ManageProductsScreenRoute.name,
+            path: '/manage-products-screen'),
+        RouteConfig(AddProductScreenRoute.name, path: '/add-product-screen'),
+        RouteConfig(UpdateProductScreenRoute.name,
+            path: '/update-product-screen')
       ];
 }
 
@@ -232,4 +249,31 @@ class SecondaryUserDisplayRoute extends PageRouteInfo<void> {
       : super(SecondaryUserDisplayRoute.name, path: '/secondary-user-display');
 
   static const String name = 'SecondaryUserDisplayRoute';
+}
+
+/// generated route for
+/// [ManageProductsScreen]
+class ManageProductsScreenRoute extends PageRouteInfo<void> {
+  const ManageProductsScreenRoute()
+      : super(ManageProductsScreenRoute.name, path: '/manage-products-screen');
+
+  static const String name = 'ManageProductsScreenRoute';
+}
+
+/// generated route for
+/// [AddProductScreen]
+class AddProductScreenRoute extends PageRouteInfo<void> {
+  const AddProductScreenRoute()
+      : super(AddProductScreenRoute.name, path: '/add-product-screen');
+
+  static const String name = 'AddProductScreenRoute';
+}
+
+/// generated route for
+/// [UpdateProductScreen]
+class UpdateProductScreenRoute extends PageRouteInfo<void> {
+  const UpdateProductScreenRoute()
+      : super(UpdateProductScreenRoute.name, path: '/update-product-screen');
+
+  static const String name = 'UpdateProductScreenRoute';
 }

@@ -12,6 +12,8 @@ abstract class Product implements _$Product{
   const factory Product({
     String? id,
     String? name,
+    String? type,
+    num? price,
     int? quantity,
     @Default(false) bool obtained,
   }) = _Product;

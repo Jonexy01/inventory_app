@@ -8,8 +8,8 @@ extension FirebaseFirestoreX on FirebaseFirestore {
   CollectionReference secondaryUsersRef(String userId) =>
       collection('users').doc(userId).collection('secondaryUsers');
 
-  DocumentReference secondaryUsersDocumentRef(uid) =>
-      collection('users').doc(uid).collection('secondaryUsers').doc();
+  DocumentReference secondaryUsersDocumentRef(String uid, String secondaryUid) =>
+      collection('users').doc(uid).collection('secondaryUsers').doc(secondaryUid);
 
   CollectionReference userProductsRef(String userId) =>
       collection('users').doc(userId).collection('products');

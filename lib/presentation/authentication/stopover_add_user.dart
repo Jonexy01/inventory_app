@@ -82,9 +82,9 @@ class _StopoverAddUserPageState extends ConsumerState<StopoverAddUserPage> {
                             title: 'Approve Secondary User',
                             body: 'Click to Approve or Decline',
                             userCategory: 'primary',
-                            primaryId: state.primaryUserRecord!.id,
-                            userNotifying: state.user!.displayName,
-                            userIdNotifying: state.user!.uid,
+                            primaryId: ref.read(authViewModelProvider).primaryUserRecord!.id,
+                            userNotifying: ref.read(authViewModelProvider).user!.displayName,
+                            userIdNotifying: ref.read(authViewModelProvider).user!.uid,
                             notificationType: 'SecondaryApproval'
                           ),
                         );

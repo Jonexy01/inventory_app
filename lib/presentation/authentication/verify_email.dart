@@ -69,11 +69,12 @@ class _VerifyEmailPageState extends ConsumerState<VerifyEmailPage> {
   bool isEmailVerified = false;
   bool canResendEmail = false;
   Timer? timer;
-
+  
   @override
   Widget build(BuildContext context) {
     final userModel = ref.read(authViewModelProvider.notifier);
     final state = ref.watch(authViewModelProvider);
+    final email = ref.read(firebaseAuthProvider).currentUser != null ? ref.read(firebaseAuthProvider).currentUser!.email : '';
 
     if (isEmailVerified) {
       return const RoleSelectPage();
@@ -89,8 +90,8 @@ class _VerifyEmailPageState extends ConsumerState<VerifyEmailPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                  'A verification email has been sent to your email address. You will be signed in automatically after verifying email'),
+              Text(
+                  'A verification email has been sent to your email address. $email You will be signed in automatically after verifying email'),
               const SizedBox(height: 10),
               RoundedTextButton(
                 isLoading: state.loadStatus == Loader.loading,

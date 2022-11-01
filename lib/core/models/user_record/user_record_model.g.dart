@@ -15,6 +15,7 @@ _$_UserRecord _$$_UserRecordFromJson(Map<String, dynamic> json) =>
       fcmToken: json['fcmToken'] as String?,
       email: json['email'] as String?,
       primaryUserId: json['primaryUserId'] as String?,
+      approved: json['approved'] as bool?,
     );
 
 Map<String, dynamic> _$$_UserRecordToJson(_$_UserRecord instance) =>
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$_UserRecordToJson(_$_UserRecord instance) =>
       'fcmToken': instance.fcmToken,
       'email': instance.email,
       'primaryUserId': instance.primaryUserId,
+      'approved': instance.approved,
     };

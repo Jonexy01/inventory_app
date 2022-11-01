@@ -9,6 +9,9 @@ import 'package:inventory_app/presentation/authentication/signup/signup.dart';
 import 'package:inventory_app/presentation/authentication/stopover.dart';
 import 'package:inventory_app/presentation/authentication/stopover_add_user.dart';
 import 'package:inventory_app/presentation/authentication/verify_email.dart';
+import 'package:inventory_app/presentation/manage_products/add_product.dart';
+import 'package:inventory_app/presentation/manage_products/manage_products.dart';
+import 'package:inventory_app/presentation/manage_products/update_product.dart';
 import 'package:inventory_app/presentation/notification/notification.dart';
 import 'package:inventory_app/presentation/secondary_user_display/secondary_user_display.dart';
 import 'package:inventory_app/presentation/splash/landing_page.dart';
@@ -35,6 +38,9 @@ part 'app_router.gr.dart';
     AutoRoute(page: SecondaryWaitPage),
     AutoRoute(page: SecondaryUserApproval),
     AutoRoute(page: SecondaryUserDisplay),
+    AutoRoute(page: ManageProductsScreen),
+    AutoRoute(page: AddProductScreen),
+    AutoRoute(page: UpdateProductScreen),
   ],            
 )            
 class AppRouter extends _$AppRouter{}

@@ -37,6 +37,12 @@ class _NavigationDrawerState extends ConsumerState<NavigationDrawer> {
         titleText: 'Secondary Users',
         route: const SecondaryUserDisplayRoute(),
       ),
+      if (state.userRecord!.role == 'primary')
+      DrawerMenuItem(
+        leading: const Icon(Icons.production_quantity_limits),
+        titleText: 'Manage Products',
+        route: const ManageProductsScreenRoute(),
+      ),
       DrawerMenuItem(
         leading: const Icon(Icons.logout_outlined),
         titleText: 'Logout',

@@ -13,19 +13,20 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
 
   final Reader _reader;
 
-  Future<ServiceResponse> updateFcmToken(String fcmToken) async {
+  Future<ServiceResponse> changeFcmToken(String fcmToken) async {
     final user = _reader(authViewModelProvider).userRecord!;
-    UserRecord userRecord = UserRecord(
-      id: user.id,
-      fcmToken: fcmToken,
-      businessName: user.businessName,
-      name: user.name,
-      role: user.role,
-      email: user.email,
-    );
+    // UserRecord userRecord = UserRecord(
+    //   id: user.id,
+    //   fcmToken: fcmToken,
+    //   businessName: user.businessName,
+    //   name: user.name,
+    //   role: user.role,
+    //   email: user.email,
+    //   primaryUserId: user.primaryUserId,
+    // );
     try {
-      await _reader(userDataCrudProvider)
-          .updateUserRecord(userRecord: userRecord);
+      await _reader(userDataCrudProvider).updateFcmToken(uid: user.id!, fcmToken: fcmToken);
+          //.updateUserRecord(userRecord: userRecord);
       return ServiceResponse(successMessage: 'fcmToken updated successfuly');
     } on FirebaseException catch (e) {
       return ServiceResponse(errorMessage: e.code);
@@ -37,7 +38,7 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
   Future<ServiceResponse> getToken() async {
     try {
       final fcmToken = await _reader(firebaseMessagingProvider).getToken();
-      updateFcmToken(fcmToken!);
+      changeFcmToken(fcmToken!);
       state = state.copyWith(
         fcmToken: fcmToken,
       );

@@ -61,7 +61,7 @@ class _RoleSelectPageState extends ConsumerState<RoleSelectPage> {
                     }),
                 const SizedBox(height: 10),
                 RoundedTextButton(
-                    color: AppColors.purple300,
+                    color: AppColors.amber,
                     text: 'Join an existing business',
                     press: () {
                       this.context.router.replace(const StopoverAddUserPageRoute());
