@@ -3,7 +3,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:inventory_app/core/models/service_response_model.dart';
-import 'package:inventory_app/core/models/user_record/user_record_model.dart';
 import 'package:inventory_app/core/utils/enums.dart';
 import 'package:inventory_app/providers/app_providers.dart';
 import 'package:riverpod/riverpod.dart';

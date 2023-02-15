@@ -24,14 +24,28 @@ class ManageProductsScreen extends StatelessWidget {
                 text: 'Add Product',
                 press: () {
                   context.router.push(const AddProductScreenRoute());
-                }),
+                },),
             const SizedBox(height: 10),
             RoundedTextButton(
                 color: AppColors.amber,
-                text: 'Update Product',
+                text: 'Update Product Price',
                 press: () {
                   context.router.push(const UpdateProductScreenRoute());
-                }),
+                },),
+            const SizedBox(height: 10),
+            RoundedTextButton(
+                color: AppColors.purple,
+                text: 'Add Product Quantity',
+                press: () {
+                  context.router.push(const UpdateProductScreenRoute());
+                },),
+            const SizedBox(height: 10),
+            RoundedTextButton(
+                color: AppColors.amber,
+                text: 'Reduce Product Quantity',
+                press: () {
+                  context.router.push(const UpdateProductScreenRoute());
+                },),
             const Spacer(),
           ],
         ),
